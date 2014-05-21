@@ -1,0 +1,54 @@
+refer
+	source devref
+		https://github.com/openstack/neutron/tree/master/doc/source/devref
+	api layer
+		https://github.com/openstack/neutron/blob/master/doc/source/devref/api_layer.rst
+	server
+		http://git.openstack.org/cgit/openstack/neutron/tree/neutron/server/__init__.py
+			main()
+				eventlet.monkey_patch()
+				config.parse()
+				pool = eventlet.GreenPool()
+				neutron_api = service.serve_wsgi(service.NeutronApiService)
+				  http://git.openstack.org/cgit/openstack/neutron/tree/neutron/service.py
+				  def serve_wsgi(cls):
+					service = cls.create()
+				 	  http://git.openstack.org/cgit/openstack/neutron/tree/neutron/service.py
+					  def create(cls, app_name='neutron'):
+						service = cls(app_name)
+						return service
+					service.start()
+					  def start(self):
+						
+				api_thread = pool.spawn(neutron_api.wait)
+				  tree/neutron/service.pyÇ÷?
+				neutron_rpc = service.serve_rpc()
+				pool.waitall()
+	
+	service
+		http://git.openstack.org/cgit/openstack/neutron/tree/neutron/service.py
+			def create(cls, host=None, binary=None, topic=None, manager=None,
+			if not topic:
+			    topic = binary.rpartition('neutron-')[2]
+			    	Ç±Ç±Ç≈topicÇê∂ê¨ÇµÇƒÇ¢ÇÈÅBÇ±ÇÍÇ™Plugin?
+			    topic = topic.replace("-", "_")
+			service_obj = cls(host, binary, topic, manager,
+	
+	Yong Sheng Gong: Deep Dive into Neutron
+		http://www.slideshare.net/gongys2004/inside-neutron-2
+			P17-18
+			url processing
+			https://github.com/openstack/neutron/blob/master/neutron/wsgi.py
+				Resource __call__(
+					dispatch()
+						getattr()
+						controller_method()
+						  Controller __call__()
+							getattr()
+							method()
+							  https://github.com/openstack/neutron/blob/master/neutron/plugins/openvswitch/ovs_neutron_plugin.py
+							  def create_network(self, context, network):ìô?
+			https://github.com/openstack/neutron/blob/master/neutron/api/api_common.py
+			https://github.com/openstack/neutron/tree/master/neutron/plugins/openvswitch
+	ovs_neutron_plugin.py
+		https://github.com/openstack/neutron/blob/master/neutron/plugins/openvswitch/ovs_neutron_plugin.py

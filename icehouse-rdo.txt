@@ -1,0 +1,136 @@
+
+refer
+	icehouse rdo
+		http://www.slideshare.net/h-saito/openstack-quickstart-icehouse
+			VirtualBox
+				host only network
+					create
+						192.168.0.240
+						172.16.0.240
+			os: centos 6.5 x86_64
+			cpu: 1
+			memory: 2 GB
+			disk: 20 GB
+			3nic:
+				eth0: 192.168.0.1
+				eth1: 172.16.0.1
+				eth2: 10.0.4.15(nat)
+			install: network
+				url: http://ftp.riken.jp/Linux/centos/6.5/os/x86_64/
+				root password: centos
+				type: desktop
+				user: user1
+				user password: user1
+			setup:
+				login root
+				必要があればproxy設定
+					vi /etc/yum.conf
+						http_proxy=
+				vi /etc/hosts
+					127.0.0.1   localhost
+					172.16.0.1  rdo
+				vi /etc/sysconfig/network
+					NETWORKING=yes
+					HOSTNAME=rdo
+				vi /etc/sysconfig/network-scripts/ifcfg-eth0
+					DEVICE=eth0
+					BOOTPROTO=static
+					OMBOOT=yes
+					TYPE=Ethernet
+				vi /etc/sysconfig/network-scripts/ifcfg-eth1
+					DEVICE=eth1
+					BOOTPROTO=static
+					OMBOOT=yes
+					TYPE=Ethernet
+					IPADDR=172.16.0.1
+					PREFIX=24
+				vi /etc/sysconfig/network-scripts/ifcfg-eth2
+					DEVICE=eth2
+					BOOTPROTO=dhcp
+					OMBOOT=yes
+					TYPE=Ethernet
+				reboot
+				
+				setenforce 0
+				getenforce
+				vi /etc/selinux/config
+					SELINUX=premissive
+				
+				login root
+				useradd -G wheel stack
+				passwd stack
+					stack
+				sudoedit /etc/sudoers
+					%wheel All=(ALL)   ALL
+				su - stack
+				sudo yum install -y http://repos.fedorapeople.org/repos/openstack/openstack-icehouse/rdo-release-icehouse-3.noarch.rpm
+				sudo yum update -y
+				sudo reboot
+				
+				login stack
+				sudo yum install -y openstack-packstack-2014.1.1-0.9.dev1055.el6
+				sudo yum install -y git
+				必要があればproxy設定
+					export http_proxy=
+					export https_proxy=
+				git clone https://github.com/h-saito/packstack-answer.git
+				cd packstack-answer
+				git checkout -b 2014.1.1-0.9.dev1055 refs/tags/openstack-packstack-2014.1.1-0.9.dev1055
+				以下のpackstackがエラーになるので、事前に以下を実施
+					sudo yum install -y puppet
+					エラーになることがあったので再試行すると成功した。
+						sqliteがないとか。
+				packstack --answer-file=all-in-one.conf
+					インストール処理に30分～1時間程度必要
+					インストールメッセージにnagiosadminユーザパスワードを控える。
+				sudo vi /etc/nova/nova.conf
+					virt_type=qemu
+				sudo vi /etc/ceilometer/ceilometer.conf
+					auth_stragegy=keystone
+				sudo vi /etc/sysconfig/network-scripts/ifcfg-eth0
+					DEVICE=eth0
+					BOOTPROTO=static
+					OMBOOT=yes
+					TYPE=OVSPort
+					DEVICETYPE=ovs
+					OVS_BRIDGE=br-ex
+				sudo ovs-vsctl show
+				sudo ovs-vsctl add-port br-ex eth0
+				sudo ovs-vsctl show
+				reboot
+				
+	rdo
+		http://openstack.redhat.com/Main_Page
+			
+
+	habana rdo
+		http://www.slideshare.net/VirtualTech-JP/140204-rdo-openstackhavana
+			rpm -q openstack-packstack
+			packstack --gen-answer-file=answer.txt
+			vi answer.txt
+			packstack --answer-file=/root/answer.txt
+			
+			vi /etc/sysctl.conf
+				net.ipv4.ip_forward = 1
+				
+				net.bridge.bridge-nf-call-ip6tables = 0
+				net.bridge.bridge-nf-call-iptables = 0
+				net.bridge.bridge-nf-call-arptables = 0
+				
+				net.ipv4.conf.all.forwarding = 1
+				net.ipv4.conf.all.rp_filter = 0
+				
+				net.ipv4.conf.default.rp_filter = 0
+			
+			vi /etc/sysconfig/network-scripts/ifcfg-br-ex
+				DEVICE=br-ex
+				BOOTPROTO=static
+				OMBOOT=yes
+				TYPE=OVSBridge
+				DEVICETYPE=ovs
+				IPADDR=192.168.0.1
+				NETMASK=255.255.255.0
+				#GATEWAY=192.168.0.254
+				#DNS1=
+				#DNS2=
+
