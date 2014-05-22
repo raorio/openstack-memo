@@ -99,6 +99,15 @@ refer
 				sudo ovs-vsctl show
 				reboot
 				
+				image add(必要に応じて、デフォルトだとcirrosが登録済み)
+					必要に応じてプロキシ設定
+					export http_proxy=
+					wget https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img
+					name=cirros-0.3-x86_64
+					image=cirros-0.3.0-x86_64-disk.img
+					glance image-create --name=$name --is-public=true --container-format=bare --disk-format=qcow2 < $image
+					nova boot --image cirros-0.3.0-x86_64 --flavor m1.small my-first-server
+            
 	rdo
 		http://openstack.redhat.com/Main_Page
 			

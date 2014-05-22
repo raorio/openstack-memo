@@ -1,0 +1,647 @@
+2014-05-22 06:12:31.361 9298 INFO neutron.common.config [-] Logging enabled!
+2014-05-22 06:12:31.396 9298 DEBUG neutron.service [-] ******************************************************************************** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1932
+2014-05-22 06:12:31.397 9298 DEBUG neutron.service [-] Configuration options gathered from: log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1933
+2014-05-22 06:12:31.398 9298 DEBUG neutron.service [-] command line args: ['--config-file', '/usr/share/neutron/neutron-dist.conf', '--config-file', '/etc/neutron/neutron.conf', '--config-file', '/etc/neutron/plugin.ini', '--log-file', '/var/log/neutron/server.log'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1934
+2014-05-22 06:12:31.398 9298 DEBUG neutron.service [-] config files: ['/usr/share/neutron/neutron-dist.conf', '/etc/neutron/neutron.conf', '/etc/neutron/plugin.ini'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1935
+2014-05-22 06:12:31.399 9298 DEBUG neutron.service [-] ================================================================================ log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1936
+2014-05-22 06:12:31.400 9298 DEBUG neutron.service [-] allow_bulk                     = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.400 9298 DEBUG neutron.service [-] allow_overlapping_ips          = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.401 9298 DEBUG neutron.service [-] allow_pagination               = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.402 9298 DEBUG neutron.service [-] allow_sorting                  = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.402 9298 DEBUG neutron.service [-] allowed_rpc_exception_modules  = ['nova.exception', 'cinder.exception', 'exceptions'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.403 9298 DEBUG neutron.service [-] api_extensions_path            =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.403 9298 DEBUG neutron.service [-] api_paste_config               = /usr/share/neutron/api-paste.ini log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.404 9298 DEBUG neutron.service [-] api_workers                    = 0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.405 9298 DEBUG neutron.service [-] auth_strategy                  = keystone log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.406 9298 DEBUG neutron.service [-] backdoor_port                  = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.407 9298 DEBUG neutron.service [-] backlog                        = 4096 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.407 9298 DEBUG neutron.service [-] base_mac                       = fa:16:3e:00:00:00 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.408 9298 DEBUG neutron.service [-] bind_host                      = 0.0.0.0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.409 9298 DEBUG neutron.service [-] bind_port                      = 9696 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.410 9298 DEBUG neutron.service [-] config_dir                     = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.410 9298 DEBUG neutron.service [-] config_file                    = ['/usr/share/neutron/neutron-dist.conf', '/etc/neutron/neutron.conf', '/etc/neutron/plugin.ini'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.411 9298 DEBUG neutron.service [-] control_exchange               = neutron log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.411 9298 DEBUG neutron.service [-] core_plugin                    = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.412 9298 DEBUG neutron.service [-] debug                          = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.413 9298 DEBUG neutron.service [-] default_log_levels             = ['amqp=WARN', 'amqplib=WARN', 'boto=WARN', 'qpid=WARN', 'sqlalchemy=WARN', 'suds=INFO', 'iso8601=WARN'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.414 9298 DEBUG neutron.service [-] dhcp_agent_notification        = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.415 9298 DEBUG neutron.service [-] dhcp_lease_duration            = 86400 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.415 9298 DEBUG neutron.service [-] disable_process_locking        = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.416 9298 DEBUG neutron.service [-] fake_rabbit                    = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.416 9298 DEBUG neutron.service [-] fatal_deprecations             = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.417 9298 DEBUG neutron.service [-] force_gateway_on_subnet        = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.417 9298 DEBUG neutron.service [-] host                           = rdo log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.419 9298 DEBUG neutron.service [-] instance_format                = [instance: %(uuid)s]  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.419 9298 DEBUG neutron.service [-] instance_uuid_format           = [instance: %(uuid)s]  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.420 9298 DEBUG neutron.service [-] lock_path                      = /var/lib/neutron/lock log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.421 9298 DEBUG neutron.service [-] log_config_append              = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.421 9298 DEBUG neutron.service [-] log_date_format                = %Y-%m-%d %H:%M:%S log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.422 9298 DEBUG neutron.service [-] log_dir                        = /var/log/neutron log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.423 9298 DEBUG neutron.service [-] log_file                       = /var/log/neutron/server.log log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.423 9298 DEBUG neutron.service [-] log_format                     = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.425 9298 DEBUG neutron.service [-] logging_context_format_string  = %(asctime)s.%(msecs)03d %(process)d %(levelname)s %(name)s [%(request_id)s %(user_identity)s] %(instance)s%(message)s log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.425 9298 DEBUG neutron.service [-] logging_debug_format_suffix    = %(funcName)s %(pathname)s:%(lineno)d log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.426 9298 DEBUG neutron.service [-] logging_default_format_string  = %(asctime)s.%(msecs)03d %(process)d %(levelname)s %(name)s [-] %(instance)s%(message)s log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.426 9298 DEBUG neutron.service [-] logging_exception_prefix       = %(asctime)s.%(msecs)03d %(process)d TRACE %(name)s %(instance)s log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.427 9298 DEBUG neutron.service [-] mac_generation_retries         = 16 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.428 9298 DEBUG neutron.service [-] max_dns_nameservers            = 5 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.428 9298 DEBUG neutron.service [-] max_fixed_ips_per_port         = 5 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.429 9298 DEBUG neutron.service [-] max_header_line                = 16384 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.430 9298 DEBUG neutron.service [-] max_subnet_host_routes         = 20 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.431 9298 DEBUG neutron.service [-] notify_nova_on_port_data_changes = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.431 9298 DEBUG neutron.service [-] notify_nova_on_port_status_changes = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.432 9298 DEBUG neutron.service [-] nova_admin_auth_url            = http://172.16.0.1:35357/v2.0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.432 9298 DEBUG neutron.service [-] nova_admin_password            = ******** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.434 9298 DEBUG neutron.service [-] nova_admin_tenant_id           = ecba3529cc4147bca80e32bf6a57f1f6 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.435 9298 DEBUG neutron.service [-] nova_admin_username            = nova log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.435 9298 DEBUG neutron.service [-] nova_region_name               = RegionOne log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.435 9298 DEBUG neutron.service [-] nova_url                       = http://172.16.0.1:8774/v2 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.436 9298 DEBUG neutron.service [-] pagination_max_limit           = -1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.437 9298 DEBUG neutron.service [-] periodic_fuzzy_delay           = 5 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.438 9298 DEBUG neutron.service [-] periodic_interval              = 40 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.439 9298 DEBUG neutron.service [-] policy_file                    = policy.json log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.439 9298 DEBUG neutron.service [-] publish_errors                 = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.440 9298 DEBUG neutron.service [-] retry_until_window             = 30 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.440 9298 DEBUG neutron.service [-] rpc_backend                    = neutron.openstack.common.rpc.impl_kombu log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.442 9298 DEBUG neutron.service [-] rpc_cast_timeout               = 30 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.443 9298 DEBUG neutron.service [-] rpc_conn_pool_size             = 30 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.443 9298 DEBUG neutron.service [-] rpc_response_timeout           = 60 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.444 9298 DEBUG neutron.service [-] rpc_thread_pool_size           = 64 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.444 9298 DEBUG neutron.service [-] rpc_workers                    = 0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.445 9298 DEBUG neutron.service [-] run_external_periodic_tasks    = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.445 9298 DEBUG neutron.service [-] send_events_interval           = 2 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.447 9298 DEBUG neutron.service [-] service_plugins                = [] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.447 9298 DEBUG neutron.service [-] sqlite_db                      =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.448 9298 DEBUG neutron.service [-] sqlite_synchronous             = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.448 9298 DEBUG neutron.service [-] ssl_ca_file                    = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.449 9298 DEBUG neutron.service [-] ssl_cert_file                  = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.449 9298 DEBUG neutron.service [-] ssl_key_file                   = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.451 9298 DEBUG neutron.service [-] state_path                     = /var/lib/neutron log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.451 9298 DEBUG neutron.service [-] syslog_log_facility            = LOG_USER log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.452 9298 DEBUG neutron.service [-] tcp_keepidle                   = 600 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.453 9298 DEBUG neutron.service [-] use_ssl                        = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.453 9298 DEBUG neutron.service [-] use_stderr                     = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.454 9298 DEBUG neutron.service [-] use_syslog                     = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.454 9298 DEBUG neutron.service [-] verbose                        = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:31.455 9298 DEBUG neutron.service [-] SECURITYGROUP.enable_security_group = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.455 9298 DEBUG neutron.service [-] SECURITYGROUP.firewall_driver  = neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.457 9298 DEBUG neutron.service [-] database.connection            = *********************************************** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.458 9298 DEBUG neutron.service [-] database.connection_debug      = 0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.459 9298 DEBUG neutron.service [-] database.connection_trace      = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.460 9298 DEBUG neutron.service [-] database.idle_timeout          = 3600 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.462 9298 DEBUG neutron.service [-] database.max_overflow          = 20 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.464 9298 DEBUG neutron.service [-] database.max_pool_size         = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.465 9298 DEBUG neutron.service [-] database.max_retries           = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.465 9298 DEBUG neutron.service [-] database.min_pool_size         = 1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.466 9298 DEBUG neutron.service [-] database.pool_timeout          = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.468 9298 DEBUG neutron.service [-] database.retry_interval        = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.469 9298 DEBUG neutron.service [-] database.slave_connection      =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:31.469 9298 DEBUG neutron.service [-] ******************************************************************************** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1955
+2014-05-22 06:12:31.471 9298 INFO neutron.common.config [-] Config paste file: /usr/share/neutron/api-paste.ini
+2014-05-22 06:12:31.927 9298 DEBUG neutron.openstack.common.lockutils [-] Got semaphore "manager" lock /usr/lib/python2.6/site-packages/neutron/openstack/common/lockutils.py:168
+2014-05-22 06:12:31.928 9298 DEBUG neutron.openstack.common.lockutils [-] Got semaphore / lock "_create_instance" inner /usr/lib/python2.6/site-packages/neutron/openstack/common/lockutils.py:248
+2014-05-22 06:12:31.929 9298 INFO neutron.manager [-] Loading core plugin: neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2
+2014-05-22 06:12:32.094 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('midonet = neutron.plugins.midonet.plugin:MidonetPluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.094 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('hyperv = neutron.plugins.hyperv.hyperv_neutron_plugin:HyperVNeutronPlugin') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.095 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('bigswitch = neutron.plugins.bigswitch.plugin:NeutronRestProxyV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.095 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('cisco = neutron.plugins.cisco.network_plugin:PluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.096 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('ibm = neutron.plugins.ibm.sdnve_neutron_plugin:SdnvePluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.096 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('nicira = neutron.plugins.nicira.NeutronPlugin:NvpPluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.097 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('linuxbridge = neutron.plugins.linuxbridge.lb_neutron_plugin:LinuxBridgePluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.098 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('nec = neutron.plugins.nec.nec_plugin:NECPluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.098 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('ml2 = neutron.plugins.ml2.plugin:Ml2Plugin') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.099 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('mlnx = neutron.plugins.mlnx.mlnx_plugin:MellanoxEswitchPlugin') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.099 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('plumgrid = neutron.plugins.plumgrid.plumgrid_plugin.plumgrid_plugin:NeutronPluginPLUMgridV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.100 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('brocade = neutron.plugins.brocade.NeutronPlugin:BrocadePluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.100 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('oneconvergence = neutron.plugins.oneconvergence.plugin.OneConvergencePluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.101 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('openvswitch = neutron.plugins.openvswitch.ovs_neutron_plugin:OVSNeutronPluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.101 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('ryu = neutron.plugins.ryu.ryu_neutron_plugin:RyuNeutronPluginV2') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.102 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('vmware = neutron.plugins.vmware.plugin:NsxPlugin') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.102 9298 DEBUG stevedore.extension [-] found extension EntryPoint.parse('embrane = neutron.plugins.embrane.plugins.embrane_ovs_plugin:EmbraneOvsPlugin') _load_plugins /usr/lib/python2.6/site-packages/stevedore/extension.py:156
+2014-05-22 06:12:32.823 9298 WARNING neutron.openstack.common.db.sqlalchemy.session [-] This application has not enabled MySQL traditional mode, which means silent data corruption may occur. Please encourage the application developers to enable this mode.
+2014-05-22 06:12:33.421 9298 INFO neutron.plugins.openvswitch.ovs_neutron_plugin [-] Network VLAN ranges: {}
+2014-05-22 06:12:34.199 9298 INFO neutron.openstack.common.rpc.common [-] Connected to AMQP server on 172.16.0.1:5672
+2014-05-22 06:12:34.260 9298 DEBUG neutron.manager [-] Loading services supported by the core plugin _load_services_from_core_plugin /usr/lib/python2.6/site-packages/neutron/manager.py:144
+2014-05-22 06:12:34.262 9298 INFO neutron.manager [-] Service L3_ROUTER_NAT is supported by the core plugin
+2014-05-22 06:12:34.263 9298 DEBUG neutron.manager [-] Loading service plugins: [] _load_service_plugins /usr/lib/python2.6/site-packages/neutron/manager.py:166
+2014-05-22 06:12:34.264 9298 DEBUG neutron.openstack.common.lockutils [-] Semaphore / lock released "_create_instance" inner /usr/lib/python2.6/site-packages/neutron/openstack/common/lockutils.py:252
+2014-05-22 06:12:34.265 9298 INFO neutron.api.extensions [-] Initializing extension manager.
+2014-05-22 06:12:34.267 9298 INFO neutron.api.extensions [-] Loading extension file: __init__.py
+2014-05-22 06:12:34.268 9298 INFO neutron.api.extensions [-] Loading extension file: __init__.pyc
+2014-05-22 06:12:34.269 9298 INFO neutron.api.extensions [-] Loading extension file: __init__.pyo
+2014-05-22 06:12:34.270 9298 INFO neutron.api.extensions [-] Loading extension file: agent.py
+2014-05-22 06:12:34.274 9298 DEBUG neutron.api.extensions [-] Ext name: agent _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.275 9298 DEBUG neutron.api.extensions [-] Ext alias: agent _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.276 9298 DEBUG neutron.api.extensions [-] Ext description: The agent management extension. _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.278 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/agent/api/v2.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.280 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-02-03T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.281 9298 INFO neutron.api.extensions [-] Loaded extension: agent
+2014-05-22 06:12:34.282 9298 INFO neutron.api.extensions [-] Loading extension file: agent.pyc
+2014-05-22 06:12:34.283 9298 INFO neutron.api.extensions [-] Loading extension file: agent.pyo
+2014-05-22 06:12:34.284 9298 INFO neutron.api.extensions [-] Loading extension file: allowedaddresspairs.py
+2014-05-22 06:12:34.288 9298 DEBUG neutron.api.extensions [-] Ext name: Allowed Address Pairs _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.289 9298 DEBUG neutron.api.extensions [-] Ext alias: allowed-address-pairs _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.290 9298 DEBUG neutron.api.extensions [-] Ext description: Provides allowed address pairs _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.292 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/allowedaddresspairs/api/v2.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.293 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-07-23T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.295 9298 INFO neutron.api.extensions [-] Loaded extension: allowed-address-pairs
+2014-05-22 06:12:34.296 9298 INFO neutron.api.extensions [-] Loading extension file: allowedaddresspairs.pyc
+2014-05-22 06:12:34.297 9298 INFO neutron.api.extensions [-] Loading extension file: allowedaddresspairs.pyo
+2014-05-22 06:12:34.299 9298 INFO neutron.api.extensions [-] Loading extension file: dhcpagentscheduler.py
+2014-05-22 06:12:34.303 9298 DEBUG neutron.api.extensions [-] Ext name: DHCP Agent Scheduler _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.303 9298 DEBUG neutron.api.extensions [-] Ext alias: dhcp_agent_scheduler _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.304 9298 DEBUG neutron.api.extensions [-] Ext description: Schedule networks among dhcp agents _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.305 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/dhcp_agent_scheduler/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.306 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-02-07T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.307 9298 INFO neutron.api.extensions [-] Loaded extension: dhcp_agent_scheduler
+2014-05-22 06:12:34.308 9298 INFO neutron.api.extensions [-] Loading extension file: dhcpagentscheduler.pyc
+2014-05-22 06:12:34.310 9298 INFO neutron.api.extensions [-] Loading extension file: dhcpagentscheduler.pyo
+2014-05-22 06:12:34.311 9298 INFO neutron.api.extensions [-] Loading extension file: external_net.py
+2014-05-22 06:12:34.317 9298 DEBUG neutron.api.extensions [-] Ext name: Neutron external network _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.318 9298 DEBUG neutron.api.extensions [-] Ext alias: external-net _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.319 9298 DEBUG neutron.api.extensions [-] Ext description: Adds external network attribute to network resource. _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.321 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/neutron/external_net/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.322 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-01-14T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.323 9298 INFO neutron.api.extensions [-] Loaded extension: external-net
+2014-05-22 06:12:34.324 9298 INFO neutron.api.extensions [-] Loading extension file: external_net.pyc
+2014-05-22 06:12:34.325 9298 INFO neutron.api.extensions [-] Loading extension file: external_net.pyo
+2014-05-22 06:12:34.326 9298 INFO neutron.api.extensions [-] Loading extension file: extra_dhcp_opt.py
+2014-05-22 06:12:34.328 9298 DEBUG neutron.api.extensions [-] Ext name: Neutron Extra DHCP opts _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.330 9298 DEBUG neutron.api.extensions [-] Ext alias: extra_dhcp_opt _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.330 9298 DEBUG neutron.api.extensions [-] Ext description: Extra options configuration for DHCP. For example PXE boot options to DHCP clients can be specified (e.g. tftp-server, server-ip-address, bootfile-name) _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.332 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/neutron/extra_dhcp_opt/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.333 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-03-17T12:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.334 9298 INFO neutron.api.extensions [-] Loaded extension: extra_dhcp_opt
+2014-05-22 06:12:34.335 9298 INFO neutron.api.extensions [-] Loading extension file: extra_dhcp_opt.pyc
+2014-05-22 06:12:34.335 9298 INFO neutron.api.extensions [-] Loading extension file: extra_dhcp_opt.pyo
+2014-05-22 06:12:34.336 9298 INFO neutron.api.extensions [-] Loading extension file: extraroute.py
+2014-05-22 06:12:34.339 9298 DEBUG neutron.api.extensions [-] Ext name: Neutron Extra Route _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.341 9298 DEBUG neutron.api.extensions [-] Ext alias: extraroute _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.342 9298 DEBUG neutron.api.extensions [-] Ext description: Extra routes configuration for L3 router _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.343 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/neutron/extraroutes/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.344 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-02-01T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.345 9298 INFO neutron.api.extensions [-] Loaded extension: extraroute
+2014-05-22 06:12:34.346 9298 INFO neutron.api.extensions [-] Loading extension file: extraroute.pyc
+2014-05-22 06:12:34.347 9298 INFO neutron.api.extensions [-] Loading extension file: extraroute.pyo
+2014-05-22 06:12:34.348 9298 INFO neutron.api.extensions [-] Loading extension file: firewall.py
+2014-05-22 06:12:34.424 9298 DEBUG neutron.api.extensions [-] Ext name: Firewall service _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.426 9298 DEBUG neutron.api.extensions [-] Ext alias: fwaas _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.427 9298 DEBUG neutron.api.extensions [-] Ext description: Extension for Firewall service _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.428 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://wiki.openstack.org/Neutron/FWaaS/API_1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.429 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-02-25T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.430 9298 WARNING neutron.api.extensions [-] Extension fwaas not supported by any of loaded plugins
+2014-05-22 06:12:34.431 9298 INFO neutron.api.extensions [-] Loading extension file: firewall.pyc
+2014-05-22 06:12:34.432 9298 INFO neutron.api.extensions [-] Loading extension file: firewall.pyo
+2014-05-22 06:12:34.433 9298 INFO neutron.api.extensions [-] Loading extension file: flavor.py
+2014-05-22 06:12:34.437 9298 DEBUG neutron.api.extensions [-] Ext name: Flavor support for network and router _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.438 9298 DEBUG neutron.api.extensions [-] Ext alias: flavor _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.438 9298 DEBUG neutron.api.extensions [-] Ext description: Flavor _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.440 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/flavor/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.441 9298 DEBUG neutron.api.extensions [-] Ext updated: 2012-07-20T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.441 9298 WARNING neutron.api.extensions [-] Extension flavor not supported by any of loaded plugins
+2014-05-22 06:12:34.443 9298 INFO neutron.api.extensions [-] Loading extension file: flavor.pyc
+2014-05-22 06:12:34.444 9298 INFO neutron.api.extensions [-] Loading extension file: flavor.pyo
+2014-05-22 06:12:34.445 9298 INFO neutron.api.extensions [-] Loading extension file: l3.py
+2014-05-22 06:12:34.453 9298 DEBUG neutron.api.extensions [-] Ext name: Neutron L3 Router _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.455 9298 DEBUG neutron.api.extensions [-] Ext alias: router _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.456 9298 DEBUG neutron.api.extensions [-] Ext description: Router abstraction for basic L3 forwarding between L2 Neutron networks and access to external networks via a NAT gateway. _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.457 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/neutron/router/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.457 9298 DEBUG neutron.api.extensions [-] Ext updated: 2012-07-20T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.458 9298 INFO neutron.api.extensions [-] Loaded extension: router
+2014-05-22 06:12:34.459 9298 INFO neutron.api.extensions [-] Loading extension file: l3.pyc
+2014-05-22 06:12:34.461 9298 INFO neutron.api.extensions [-] Loading extension file: l3.pyo
+2014-05-22 06:12:34.461 9298 INFO neutron.api.extensions [-] Loading extension file: l3_ext_gw_mode.py
+2014-05-22 06:12:34.485 9298 DEBUG neutron.api.extensions [-] Ext name: Neutron L3 Configurable external gateway mode _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.486 9298 DEBUG neutron.api.extensions [-] Ext alias: ext-gw-mode _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.487 9298 DEBUG neutron.api.extensions [-] Ext description: Extension of the router abstraction for specifying whether SNAT should occur on the external gateway _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.488 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/neutron/ext-gw-mode/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.488 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-03-28T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.490 9298 INFO neutron.api.extensions [-] Loaded extension: ext-gw-mode
+2014-05-22 06:12:34.491 9298 INFO neutron.api.extensions [-] Loading extension file: l3_ext_gw_mode.pyc
+2014-05-22 06:12:34.492 9298 INFO neutron.api.extensions [-] Loading extension file: l3_ext_gw_mode.pyo
+2014-05-22 06:12:34.493 9298 INFO neutron.api.extensions [-] Loading extension file: l3agentscheduler.py
+2014-05-22 06:12:34.497 9298 DEBUG neutron.api.extensions [-] Ext name: L3 Agent Scheduler _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.498 9298 DEBUG neutron.api.extensions [-] Ext alias: l3_agent_scheduler _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.499 9298 DEBUG neutron.api.extensions [-] Ext description: Schedule routers among l3 agents _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.500 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/l3_agent_scheduler/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.501 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-02-07T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.504 9298 INFO neutron.api.extensions [-] Loaded extension: l3_agent_scheduler
+2014-05-22 06:12:34.506 9298 INFO neutron.api.extensions [-] Loading extension file: l3agentscheduler.pyc
+2014-05-22 06:12:34.507 9298 INFO neutron.api.extensions [-] Loading extension file: l3agentscheduler.pyo
+2014-05-22 06:12:34.508 9298 INFO neutron.api.extensions [-] Loading extension file: lbaas_agentscheduler.py
+2014-05-22 06:12:34.528 9298 DEBUG neutron.api.extensions [-] Ext name: Loadbalancer Agent Scheduler _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.530 9298 DEBUG neutron.api.extensions [-] Ext alias: lbaas_agent_scheduler _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.533 9298 DEBUG neutron.api.extensions [-] Ext description: Schedule pools among lbaas agents _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.535 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/lbaas_agent_scheduler/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.536 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-02-07T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.537 9298 WARNING neutron.api.extensions [-] Extension lbaas_agent_scheduler not supported by any of loaded plugins
+2014-05-22 06:12:34.538 9298 INFO neutron.api.extensions [-] Loading extension file: lbaas_agentscheduler.pyc
+2014-05-22 06:12:34.539 9298 INFO neutron.api.extensions [-] Loading extension file: lbaas_agentscheduler.pyo
+2014-05-22 06:12:34.540 9298 INFO neutron.api.extensions [-] Loading extension file: loadbalancer.py
+2014-05-22 06:12:34.550 9298 DEBUG neutron.api.extensions [-] Ext name: LoadBalancing service _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.552 9298 DEBUG neutron.api.extensions [-] Ext alias: lbaas _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.552 9298 DEBUG neutron.api.extensions [-] Ext description: Extension for LoadBalancing service _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.554 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://wiki.openstack.org/neutron/LBaaS/API_1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.555 9298 DEBUG neutron.api.extensions [-] Ext updated: 2012-10-07T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.556 9298 WARNING neutron.api.extensions [-] Extension lbaas not supported by any of loaded plugins
+2014-05-22 06:12:34.557 9298 INFO neutron.api.extensions [-] Loading extension file: loadbalancer.pyc
+2014-05-22 06:12:34.558 9298 INFO neutron.api.extensions [-] Loading extension file: loadbalancer.pyo
+2014-05-22 06:12:34.559 9298 INFO neutron.api.extensions [-] Loading extension file: metering.py
+2014-05-22 06:12:34.565 9298 DEBUG neutron.api.extensions [-] Ext name: Neutron Metering _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.565 9298 DEBUG neutron.api.extensions [-] Ext alias: metering _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.567 9298 DEBUG neutron.api.extensions [-] Ext description: Neutron Metering extension. _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.567 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://wiki.openstack.org/wiki/Neutron/Metering/Bandwidth#API _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.569 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-06-12T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.570 9298 WARNING neutron.api.extensions [-] Extension metering not supported by any of loaded plugins
+2014-05-22 06:12:34.571 9298 INFO neutron.api.extensions [-] Loading extension file: metering.pyc
+2014-05-22 06:12:34.572 9298 INFO neutron.api.extensions [-] Loading extension file: metering.pyo
+2014-05-22 06:12:34.572 9298 INFO neutron.api.extensions [-] Loading extension file: multiprovidernet.py
+2014-05-22 06:12:34.578 9298 DEBUG neutron.api.extensions [-] Ext name: Multi Provider Network _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.579 9298 DEBUG neutron.api.extensions [-] Ext alias: multi-provider _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.580 9298 DEBUG neutron.api.extensions [-] Ext description: Expose mapping of virtual networks to multiple physical networks _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.581 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/multi-provider/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.582 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-06-27T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.584 9298 WARNING neutron.api.extensions [-] Extension multi-provider not supported by any of loaded plugins
+2014-05-22 06:12:34.584 9298 INFO neutron.api.extensions [-] Loading extension file: multiprovidernet.pyc
+2014-05-22 06:12:34.585 9298 INFO neutron.api.extensions [-] Loading extension file: multiprovidernet.pyo
+2014-05-22 06:12:34.586 9298 INFO neutron.api.extensions [-] Loading extension file: portbindings.py
+2014-05-22 06:12:34.590 9298 DEBUG neutron.api.extensions [-] Ext name: Port Binding _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.591 9298 DEBUG neutron.api.extensions [-] Ext alias: binding _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.592 9298 DEBUG neutron.api.extensions [-] Ext description: Expose port bindings of a virtual port to external application _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.593 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/binding/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.594 9298 DEBUG neutron.api.extensions [-] Ext updated: 2014-02-03T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.595 9298 INFO neutron.api.extensions [-] Loaded extension: binding
+2014-05-22 06:12:34.596 9298 INFO neutron.api.extensions [-] Loading extension file: portbindings.pyc
+2014-05-22 06:12:34.597 9298 INFO neutron.api.extensions [-] Loading extension file: portbindings.pyo
+2014-05-22 06:12:34.598 9298 INFO neutron.api.extensions [-] Loading extension file: portsecurity.py
+2014-05-22 06:12:34.617 9298 DEBUG neutron.api.extensions [-] Ext name: Port Security _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.619 9298 DEBUG neutron.api.extensions [-] Ext alias: port-security _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.620 9298 DEBUG neutron.api.extensions [-] Ext description: Provides port security _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.620 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/portsecurity/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.621 9298 DEBUG neutron.api.extensions [-] Ext updated: 2012-07-23T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.623 9298 WARNING neutron.api.extensions [-] Extension port-security not supported by any of loaded plugins
+2014-05-22 06:12:34.624 9298 INFO neutron.api.extensions [-] Loading extension file: portsecurity.pyc
+2014-05-22 06:12:34.625 9298 INFO neutron.api.extensions [-] Loading extension file: portsecurity.pyo
+2014-05-22 06:12:34.626 9298 INFO neutron.api.extensions [-] Loading extension file: providernet.py
+2014-05-22 06:12:34.632 9298 DEBUG neutron.api.extensions [-] Ext name: Provider Network _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.633 9298 DEBUG neutron.api.extensions [-] Ext alias: provider _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.634 9298 DEBUG neutron.api.extensions [-] Ext description: Expose mapping of virtual networks to physical networks _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.635 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/provider/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.636 9298 DEBUG neutron.api.extensions [-] Ext updated: 2012-09-07T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.637 9298 INFO neutron.api.extensions [-] Loaded extension: provider
+2014-05-22 06:12:34.638 9298 INFO neutron.api.extensions [-] Loading extension file: providernet.pyc
+2014-05-22 06:12:34.640 9298 INFO neutron.api.extensions [-] Loading extension file: providernet.pyo
+2014-05-22 06:12:34.640 9298 INFO neutron.api.extensions [-] Loading extension file: quotasv2.py
+2014-05-22 06:12:34.663 9298 DEBUG neutron.api.extensions [-] Ext name: Quota management support _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.665 9298 DEBUG neutron.api.extensions [-] Ext alias: quotas _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.666 9298 DEBUG neutron.api.extensions [-] Ext description: Expose functions for quotas management per tenant _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.667 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/network/ext/quotas-sets/api/v2.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.668 9298 DEBUG neutron.api.extensions [-] Ext updated: 2012-07-29T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.668 9298 INFO neutron.api.extensions [-] Loaded extension: quotas
+2014-05-22 06:12:34.670 9298 INFO neutron.api.extensions [-] Loading extension file: quotasv2.pyc
+2014-05-22 06:12:34.673 9298 INFO neutron.api.extensions [-] Loading extension file: quotasv2.pyo
+2014-05-22 06:12:34.674 9298 INFO neutron.api.extensions [-] Loading extension file: routedserviceinsertion.py
+2014-05-22 06:12:34.683 9298 DEBUG neutron.api.extensions [-] Ext name: Routed Service Insertion _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.684 9298 DEBUG neutron.api.extensions [-] Ext alias: routed-service-insertion _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.685 9298 DEBUG neutron.api.extensions [-] Ext description: Provides routed service type _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.686 9298 DEBUG neutron.api.extensions [-] Ext namespace:  _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.687 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-01-29T00:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.688 9298 WARNING neutron.api.extensions [-] Extension routed-service-insertion not supported by any of loaded plugins
+2014-05-22 06:12:34.689 9298 INFO neutron.api.extensions [-] Loading extension file: routedserviceinsertion.pyc
+2014-05-22 06:12:34.690 9298 INFO neutron.api.extensions [-] Loading extension file: routedserviceinsertion.pyo
+2014-05-22 06:12:34.690 9298 INFO neutron.api.extensions [-] Loading extension file: routerservicetype.py
+2014-05-22 06:12:34.695 9298 DEBUG neutron.api.extensions [-] Ext name: Router Service Type _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.696 9298 DEBUG neutron.api.extensions [-] Ext alias: router-service-type _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.697 9298 DEBUG neutron.api.extensions [-] Ext description: Provides router service type _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.698 9298 DEBUG neutron.api.extensions [-] Ext namespace:  _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.699 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-01-29T00:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.700 9298 WARNING neutron.api.extensions [-] Extension router-service-type not supported by any of loaded plugins
+2014-05-22 06:12:34.701 9298 INFO neutron.api.extensions [-] Loading extension file: routerservicetype.pyc
+2014-05-22 06:12:34.701 9298 INFO neutron.api.extensions [-] Loading extension file: routerservicetype.pyo
+2014-05-22 06:12:34.702 9298 INFO neutron.api.extensions [-] Loading extension file: securitygroup.py
+2014-05-22 06:12:34.713 9298 DEBUG neutron.api.extensions [-] Ext name: security-group _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.714 9298 DEBUG neutron.api.extensions [-] Ext alias: security-group _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.715 9298 DEBUG neutron.api.extensions [-] Ext description: The security groups extension. _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.717 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/securitygroups/api/v2.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.718 9298 DEBUG neutron.api.extensions [-] Ext updated: 2012-10-05T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.719 9298 INFO neutron.api.extensions [-] Loaded extension: security-group
+2014-05-22 06:12:34.720 9298 INFO neutron.api.extensions [-] Loading extension file: securitygroup.pyc
+2014-05-22 06:12:34.720 9298 INFO neutron.api.extensions [-] Loading extension file: securitygroup.pyo
+2014-05-22 06:12:34.722 9298 INFO neutron.api.extensions [-] Loading extension file: servicetype.py
+2014-05-22 06:12:34.726 9298 DEBUG neutron.api.extensions [-] Ext name: Neutron Service Type Management _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.728 9298 DEBUG neutron.api.extensions [-] Ext alias: service-type _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.730 9298 DEBUG neutron.api.extensions [-] Ext description: API for retrieving service providers for Neutron advanced services _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.731 9298 DEBUG neutron.api.extensions [-] Ext namespace: http://docs.openstack.org/ext/neutron/service-type/api/v1.0 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.732 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-01-20T00:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.734 9298 WARNING neutron.api.extensions [-] Extension service-type not supported by any of loaded plugins
+2014-05-22 06:12:34.735 9298 INFO neutron.api.extensions [-] Loading extension file: servicetype.pyc
+2014-05-22 06:12:34.736 9298 INFO neutron.api.extensions [-] Loading extension file: servicetype.pyo
+2014-05-22 06:12:34.737 9298 INFO neutron.api.extensions [-] Loading extension file: vpnaas.py
+2014-05-22 06:12:34.749 9298 DEBUG neutron.api.extensions [-] Ext name: VPN service _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:511
+2014-05-22 06:12:34.750 9298 DEBUG neutron.api.extensions [-] Ext alias: vpnaas _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:512
+2014-05-22 06:12:34.752 9298 DEBUG neutron.api.extensions [-] Ext description: Extension for VPN service _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:513
+2014-05-22 06:12:34.753 9298 DEBUG neutron.api.extensions [-] Ext namespace: https://wiki.openstack.org/Neutron/VPNaaS _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:514
+2014-05-22 06:12:34.754 9298 DEBUG neutron.api.extensions [-] Ext updated: 2013-05-29T10:00:00-00:00 _check_extension /usr/lib/python2.6/site-packages/neutron/api/extensions.py:515
+2014-05-22 06:12:34.755 9298 WARNING neutron.api.extensions [-] Extension vpnaas not supported by any of loaded plugins
+2014-05-22 06:12:34.756 9298 INFO neutron.api.extensions [-] Loading extension file: vpnaas.pyc
+2014-05-22 06:12:34.756 9298 INFO neutron.api.extensions [-] Loading extension file: vpnaas.pyo
+2014-05-22 06:12:34.758 9298 INFO neutron.api.extensions [-] Extension 'agent' provides no backward compatibility map for extended attributes
+2014-05-22 06:12:34.759 9298 INFO neutron.api.extensions [-] Extension 'Allowed Address Pairs' provides no backward compatibility map for extended attributes
+2014-05-22 06:12:34.761 9298 INFO neutron.api.extensions [-] Extension 'Neutron Extra Route' provides no backward compatibility map for extended attributes
+2014-05-22 06:12:34.772 9298 DEBUG routes.middleware [-] Initialized with method overriding = True, and path info altering = True __init__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:41
+2014-05-22 06:12:34.787 9298 DEBUG neutron.api.extensions [-] Extended resource: extensions __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.793 9298 DEBUG neutron.api.extensions [-] Extended resource: security-groups __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.799 9298 DEBUG neutron.api.extensions [-] Extended resource: security-group-rules __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.803 9298 DEBUG neutron.api.extensions [-] Extended resource: l3-routers __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.808 9298 DEBUG neutron.api.extensions [-] Extended resource: l3-agents __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.814 9298 DEBUG neutron.api.extensions [-] Extended resource: agents __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.822 9298 DEBUG neutron.api.extensions [-] Extended resource: quotas __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.829 9298 DEBUG neutron.api.extensions [-] Extended resource: dhcp-networks __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.835 9298 DEBUG neutron.api.extensions [-] Extended resource: dhcp-agents __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.841 9298 DEBUG neutron.api.extensions [-] Extended resource: routers __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.846 9298 DEBUG neutron.api.extensions [-] Extended resource: floatingips __init__ /usr/lib/python2.6/site-packages/neutron/api/extensions.py:282
+2014-05-22 06:12:34.850 9298 DEBUG routes.middleware [-] Initialized with method overriding = True, and path info altering = True __init__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:41
+2014-05-22 06:12:34.851 9298 INFO keystoneclient.middleware.auth_token [-] Starting keystone auth_token middleware
+2014-05-22 06:12:34.851 9298 WARNING keystoneclient.middleware.auth_token [-] Configuring admin URI using auth fragments. This is deprecated, use 'identity_uri' instead.
+2014-05-22 06:12:34.859 9298 INFO keystoneclient.middleware.auth_token [-] Using /tmp/keystone-signing-EvDPSZ as cache directory for signing certificate
+2014-05-22 06:12:34.934 9298 DEBUG neutron.service [-] ******************************************************************************** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1932
+2014-05-22 06:12:34.935 9298 DEBUG neutron.service [-] Configuration options gathered from: log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1933
+2014-05-22 06:12:34.936 9298 DEBUG neutron.service [-] command line args: ['--config-file', '/usr/share/neutron/neutron-dist.conf', '--config-file', '/etc/neutron/neutron.conf', '--config-file', '/etc/neutron/plugin.ini', '--log-file', '/var/log/neutron/server.log'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1934
+2014-05-22 06:12:34.937 9298 DEBUG neutron.service [-] config files: ['/usr/share/neutron/neutron-dist.conf', '/etc/neutron/neutron.conf', '/etc/neutron/plugin.ini'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1935
+2014-05-22 06:12:34.938 9298 DEBUG neutron.service [-] ================================================================================ log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1936
+2014-05-22 06:12:34.940 9298 DEBUG neutron.service [-] agent_down_time                = 75 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.941 9298 DEBUG neutron.service [-] allow_bulk                     = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.942 9298 DEBUG neutron.service [-] allow_overlapping_ips          = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.943 9298 DEBUG neutron.service [-] allow_pagination               = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.944 9298 DEBUG neutron.service [-] allow_sorting                  = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.945 9298 DEBUG neutron.service [-] allowed_rpc_exception_modules  = ['nova.exception', 'cinder.exception', 'exceptions'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.946 9298 DEBUG neutron.service [-] amqp_auto_delete               = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.947 9298 DEBUG neutron.service [-] amqp_durable_queues            = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.948 9298 DEBUG neutron.service [-] api_extensions_path            =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.949 9298 DEBUG neutron.service [-] api_paste_config               = /usr/share/neutron/api-paste.ini log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.949 9298 DEBUG neutron.service [-] api_workers                    = 0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.950 9298 DEBUG neutron.service [-] auth_strategy                  = keystone log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.951 9298 DEBUG neutron.service [-] backdoor_port                  = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.952 9298 DEBUG neutron.service [-] backlog                        = 4096 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.953 9298 DEBUG neutron.service [-] base_mac                       = fa:16:3e:00:00:00 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.954 9298 DEBUG neutron.service [-] bind_host                      = 0.0.0.0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.954 9298 DEBUG neutron.service [-] bind_port                      = 9696 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.955 9298 DEBUG neutron.service [-] config_dir                     = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.956 9298 DEBUG neutron.service [-] config_file                    = ['/usr/share/neutron/neutron-dist.conf', '/etc/neutron/neutron.conf', '/etc/neutron/plugin.ini'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.957 9298 DEBUG neutron.service [-] control_exchange               = neutron log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.957 9298 DEBUG neutron.service [-] core_plugin                    = neutron.plugins.openvswitch.ovs_neutron_plugin.OVSNeutronPluginV2 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.958 9298 DEBUG neutron.service [-] debug                          = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.959 9298 DEBUG neutron.service [-] default_log_levels             = ['amqp=WARN', 'amqplib=WARN', 'boto=WARN', 'qpid=WARN', 'sqlalchemy=WARN', 'suds=INFO', 'iso8601=WARN'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.960 9298 DEBUG neutron.service [-] default_notification_level     = INFO log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.960 9298 DEBUG neutron.service [-] default_publisher_id           = rdo log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.963 9298 DEBUG neutron.service [-] dhcp_agent_notification        = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.963 9298 DEBUG neutron.service [-] dhcp_agents_per_network        = 1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.964 9298 DEBUG neutron.service [-] dhcp_lease_duration            = 86400 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.966 9298 DEBUG neutron.service [-] disable_process_locking        = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.966 9298 DEBUG neutron.service [-] fake_rabbit                    = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.967 9298 DEBUG neutron.service [-] fatal_deprecations             = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.968 9298 DEBUG neutron.service [-] force_gateway_on_subnet        = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.969 9298 DEBUG neutron.service [-] host                           = rdo log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.970 9298 DEBUG neutron.service [-] instance_format                = [instance: %(uuid)s]  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.972 9298 DEBUG neutron.service [-] instance_uuid_format           = [instance: %(uuid)s]  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.973 9298 DEBUG neutron.service [-] kombu_ssl_ca_certs             =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.974 9298 DEBUG neutron.service [-] kombu_ssl_certfile             =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.975 9298 DEBUG neutron.service [-] kombu_ssl_keyfile              =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.977 9298 DEBUG neutron.service [-] kombu_ssl_version              =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.978 9298 DEBUG neutron.service [-] lock_path                      = /var/lib/neutron/lock log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.979 9298 DEBUG neutron.service [-] log_config_append              = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.980 9298 DEBUG neutron.service [-] log_date_format                = %Y-%m-%d %H:%M:%S log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.981 9298 DEBUG neutron.service [-] log_dir                        = /var/log/neutron log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.982 9298 DEBUG neutron.service [-] log_file                       = /var/log/neutron/server.log log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.983 9298 DEBUG neutron.service [-] log_format                     = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.984 9298 DEBUG neutron.service [-] logging_context_format_string  = %(asctime)s.%(msecs)03d %(process)d %(levelname)s %(name)s [%(request_id)s %(user_identity)s] %(instance)s%(message)s log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.985 9298 DEBUG neutron.service [-] logging_debug_format_suffix    = %(funcName)s %(pathname)s:%(lineno)d log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.985 9298 DEBUG neutron.service [-] logging_default_format_string  = %(asctime)s.%(msecs)03d %(process)d %(levelname)s %(name)s [-] %(instance)s%(message)s log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.986 9298 DEBUG neutron.service [-] logging_exception_prefix       = %(asctime)s.%(msecs)03d %(process)d TRACE %(name)s %(instance)s log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.986 9298 DEBUG neutron.service [-] mac_generation_retries         = 16 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.987 9298 DEBUG neutron.service [-] max_dns_nameservers            = 5 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.988 9298 DEBUG neutron.service [-] max_fixed_ips_per_port         = 5 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.989 9298 DEBUG neutron.service [-] max_header_line                = 16384 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.989 9298 DEBUG neutron.service [-] max_routes                     = 30 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.990 9298 DEBUG neutron.service [-] max_subnet_host_routes         = 20 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.990 9298 DEBUG neutron.service [-] memcached_servers              = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.991 9298 DEBUG neutron.service [-] network_auto_schedule          = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.991 9298 DEBUG neutron.service [-] network_scheduler_driver       = neutron.scheduler.dhcp_agent_scheduler.ChanceScheduler log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.992 9298 DEBUG neutron.service [-] notification_driver            = ['neutron.openstack.common.notifier.rpc_notifier'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.994 9298 DEBUG neutron.service [-] notify_nova_on_port_data_changes = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.995 9298 DEBUG neutron.service [-] notify_nova_on_port_status_changes = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.996 9298 DEBUG neutron.service [-] nova_admin_auth_url            = http://172.16.0.1:35357/v2.0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.997 9298 DEBUG neutron.service [-] nova_admin_password            = ******** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.997 9298 DEBUG neutron.service [-] nova_admin_tenant_id           = ecba3529cc4147bca80e32bf6a57f1f6 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:34.998 9298 DEBUG neutron.service [-] nova_admin_username            = nova log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.000 9298 DEBUG neutron.service [-] nova_region_name               = RegionOne log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.001 9298 DEBUG neutron.service [-] nova_url                       = http://172.16.0.1:8774/v2 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.002 9298 DEBUG neutron.service [-] pagination_max_limit           = -1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.003 9298 DEBUG neutron.service [-] periodic_fuzzy_delay           = 5 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.004 9298 DEBUG neutron.service [-] periodic_interval              = 40 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.005 9298 DEBUG neutron.service [-] policy_file                    = policy.json log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.006 9298 DEBUG neutron.service [-] publish_errors                 = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.006 9298 DEBUG neutron.service [-] rabbit_ha_queues               = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.008 9298 DEBUG neutron.service [-] rabbit_host                    = 172.16.0.1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.009 9298 DEBUG neutron.service [-] rabbit_hosts                   = ['172.16.0.1:5672'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.010 9298 DEBUG neutron.service [-] rabbit_max_retries             = 0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.011 9298 DEBUG neutron.service [-] rabbit_password                = ***** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.013 9298 DEBUG neutron.service [-] rabbit_port                    = 5672 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.014 9298 DEBUG neutron.service [-] rabbit_retry_backoff           = 2 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.015 9298 DEBUG neutron.service [-] rabbit_retry_interval          = 1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.015 9298 DEBUG neutron.service [-] rabbit_use_ssl                 = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.017 9298 DEBUG neutron.service [-] rabbit_userid                  = guest log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.018 9298 DEBUG neutron.service [-] rabbit_virtual_host            = / log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.019 9298 DEBUG neutron.service [-] retry_until_window             = 30 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.019 9298 DEBUG neutron.service [-] root_helper                    = sudo log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.020 9298 DEBUG neutron.service [-] router_auto_schedule           = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.020 9298 DEBUG neutron.service [-] router_scheduler_driver        = neutron.scheduler.l3_agent_scheduler.ChanceScheduler log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.020 9298 DEBUG neutron.service [-] rpc_backend                    = neutron.openstack.common.rpc.impl_kombu log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.021 9298 DEBUG neutron.service [-] rpc_cast_timeout               = 30 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.022 9298 DEBUG neutron.service [-] rpc_conn_pool_size             = 30 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.023 9298 DEBUG neutron.service [-] rpc_response_timeout           = 60 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.025 9298 DEBUG neutron.service [-] rpc_thread_pool_size           = 64 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.026 9298 DEBUG neutron.service [-] rpc_workers                    = 0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.026 9298 DEBUG neutron.service [-] run_external_periodic_tasks    = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.027 9298 DEBUG neutron.service [-] send_events_interval           = 2 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.028 9298 DEBUG neutron.service [-] service_plugins                = [] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.029 9298 DEBUG neutron.service [-] sqlite_db                      =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.030 9298 DEBUG neutron.service [-] sqlite_synchronous             = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.032 9298 DEBUG neutron.service [-] ssl_ca_file                    = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.033 9298 DEBUG neutron.service [-] ssl_cert_file                  = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.034 9298 DEBUG neutron.service [-] ssl_key_file                   = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.034 9298 DEBUG neutron.service [-] state_path                     = /var/lib/neutron log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.035 9298 DEBUG neutron.service [-] syslog_log_facility            = LOG_USER log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.035 9298 DEBUG neutron.service [-] tcp_keepidle                   = 600 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.036 9298 DEBUG neutron.service [-] use_ssl                        = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.037 9298 DEBUG neutron.service [-] use_stderr                     = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.037 9298 DEBUG neutron.service [-] use_syslog                     = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.038 9298 DEBUG neutron.service [-] verbose                        = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1945
+2014-05-22 06:12:35.039 9298 DEBUG neutron.service [-] OVS.bridge_mappings            = [] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.039 9298 DEBUG neutron.service [-] OVS.enable_tunneling           = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.040 9298 DEBUG neutron.service [-] OVS.int_peer_patch_port        = patch-tun log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.041 9298 DEBUG neutron.service [-] OVS.integration_bridge         = br-int log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.041 9298 DEBUG neutron.service [-] OVS.local_ip                   =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.043 9298 DEBUG neutron.service [-] OVS.network_vlan_ranges        = [] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.043 9298 DEBUG neutron.service [-] OVS.tenant_network_type        = local log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.044 9298 DEBUG neutron.service [-] OVS.tun_peer_patch_port        = patch-int log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.045 9298 DEBUG neutron.service [-] OVS.tunnel_bridge              = br-tun log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.046 9298 DEBUG neutron.service [-] OVS.tunnel_id_ranges           = [] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.047 9298 DEBUG neutron.service [-] OVS.tunnel_type                =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.048 9298 DEBUG neutron.service [-] service_providers.service_provider = ['LOADBALANCER:Haproxy:neutron.services.loadbalancer.drivers.haproxy.plugin_driver.HaproxyOnHostPluginDriver:default', 'VPN:openswan:neutron.services.vpn.service_drivers.ipsec.IPsecVPNDriver:default'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.048 9298 DEBUG neutron.service [-] database.connection            = *********************************************** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.049 9298 DEBUG neutron.service [-] database.connection_debug      = 0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.050 9298 DEBUG neutron.service [-] database.connection_trace      = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.050 9298 DEBUG neutron.service [-] database.idle_timeout          = 3600 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.052 9298 DEBUG neutron.service [-] database.max_overflow          = 20 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.053 9298 DEBUG neutron.service [-] database.max_pool_size         = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.054 9298 DEBUG neutron.service [-] database.max_retries           = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.054 9298 DEBUG neutron.service [-] database.min_pool_size         = 1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.055 9298 DEBUG neutron.service [-] database.pool_timeout          = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.056 9298 DEBUG neutron.service [-] database.retry_interval        = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.057 9298 DEBUG neutron.service [-] database.slave_connection      =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.058 9298 DEBUG neutron.service [-] QUOTAS.default_quota           = -1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.058 9298 DEBUG neutron.service [-] QUOTAS.quota_driver            = neutron.db.quota_db.DbQuotaDriver log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.059 9298 DEBUG neutron.service [-] QUOTAS.quota_firewall          = 1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.060 9298 DEBUG neutron.service [-] QUOTAS.quota_firewall_policy   = 1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.060 9298 DEBUG neutron.service [-] QUOTAS.quota_firewall_rule     = -1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.061 9298 DEBUG neutron.service [-] QUOTAS.quota_floatingip        = 50 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.062 9298 DEBUG neutron.service [-] QUOTAS.quota_health_monitor    = -1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.064 9298 DEBUG neutron.service [-] QUOTAS.quota_items             = ['network', 'subnet', 'port'] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.064 9298 DEBUG neutron.service [-] QUOTAS.quota_member            = -1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.065 9298 DEBUG neutron.service [-] QUOTAS.quota_network           = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.066 9298 DEBUG neutron.service [-] QUOTAS.quota_pool              = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.067 9298 DEBUG neutron.service [-] QUOTAS.quota_port              = 50 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.067 9298 DEBUG neutron.service [-] QUOTAS.quota_router            = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.068 9298 DEBUG neutron.service [-] QUOTAS.quota_security_group    = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.069 9298 DEBUG neutron.service [-] QUOTAS.quota_security_group_rule = 100 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.069 9298 DEBUG neutron.service [-] QUOTAS.quota_subnet            = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.070 9298 DEBUG neutron.service [-] QUOTAS.quota_vip               = 10 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.071 9298 DEBUG neutron.service [-] AGENT.l2_population            = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.071 9298 DEBUG neutron.service [-] AGENT.minimize_polling         = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.072 9298 DEBUG neutron.service [-] AGENT.ovsdb_monitor_respawn_interval = 30 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.072 9298 DEBUG neutron.service [-] AGENT.polling_interval         = 2 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.073 9298 DEBUG neutron.service [-] AGENT.report_interval          = 30.0 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.074 9298 DEBUG neutron.service [-] AGENT.root_helper              = sudo neutron-rootwrap /etc/neutron/rootwrap.conf log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.075 9298 DEBUG neutron.service [-] AGENT.tunnel_types             = [] log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.076 9298 DEBUG neutron.service [-] AGENT.veth_mtu                 = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.076 9298 DEBUG neutron.service [-] AGENT.vxlan_udp_port           = 4789 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.077 9298 DEBUG neutron.service [-] ssl.ca_file                    = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.077 9298 DEBUG neutron.service [-] ssl.cert_file                  = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.080 9298 DEBUG neutron.service [-] ssl.key_file                   = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.081 9298 DEBUG neutron.service [-] SECURITYGROUP.enable_security_group = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.085 9298 DEBUG neutron.service [-] SECURITYGROUP.firewall_driver  = neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.087 9298 DEBUG neutron.service [-] keystone_authtoken.admin_password = ******** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.088 9298 DEBUG neutron.service [-] keystone_authtoken.admin_tenant_name = services log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.089 9298 DEBUG neutron.service [-] keystone_authtoken.admin_token = **** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.092 9298 DEBUG neutron.service [-] keystone_authtoken.admin_user  = neutron log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.093 9298 DEBUG neutron.service [-] keystone_authtoken.auth_admin_prefix =  log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.093 9298 DEBUG neutron.service [-] keystone_authtoken.auth_host   = 172.16.0.1 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.096 9298 DEBUG neutron.service [-] keystone_authtoken.auth_port   = 35357 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.098 9298 DEBUG neutron.service [-] keystone_authtoken.auth_protocol = http log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.099 9298 DEBUG neutron.service [-] keystone_authtoken.auth_uri    = http://172.16.0.1:5000/ log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.101 9298 DEBUG neutron.service [-] keystone_authtoken.auth_version = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.103 9298 DEBUG neutron.service [-] keystone_authtoken.cache       = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.103 9298 DEBUG neutron.service [-] keystone_authtoken.cafile      = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.104 9298 DEBUG neutron.service [-] keystone_authtoken.certfile    = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.104 9298 DEBUG neutron.service [-] keystone_authtoken.delay_auth_decision = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.105 9298 DEBUG neutron.service [-] keystone_authtoken.enforce_token_bind = permissive log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.106 9298 DEBUG neutron.service [-] keystone_authtoken.http_connect_timeout = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.106 9298 DEBUG neutron.service [-] keystone_authtoken.http_request_max_retries = 3 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.107 9298 DEBUG neutron.service [-] keystone_authtoken.identity_uri = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.107 9298 DEBUG neutron.service [-] keystone_authtoken.include_service_catalog = True log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.108 9298 DEBUG neutron.service [-] keystone_authtoken.insecure    = False log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.108 9298 DEBUG neutron.service [-] keystone_authtoken.keyfile     = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.109 9298 DEBUG neutron.service [-] keystone_authtoken.memcache_secret_key = **** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.109 9298 DEBUG neutron.service [-] keystone_authtoken.memcache_security_strategy = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.110 9298 DEBUG neutron.service [-] keystone_authtoken.memcached_servers = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.111 9298 DEBUG neutron.service [-] keystone_authtoken.revocation_cache_time = 300 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.112 9298 DEBUG neutron.service [-] keystone_authtoken.signing_dir = None log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.112 9298 DEBUG neutron.service [-] keystone_authtoken.token_cache_time = 300 log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1953
+2014-05-22 06:12:35.112 9298 DEBUG neutron.service [-] ******************************************************************************** log_opt_values /usr/lib/python2.6/site-packages/oslo/config/cfg.py:1955
+2014-05-22 06:12:35.114 9298 INFO neutron.service [-] Neutron service started, listening on 0.0.0.0:9696
+2014-05-22 06:12:35.115 9298 DEBUG neutron.service [-] Active plugin doesn't implement start_rpc_listener serve_rpc /usr/lib/python2.6/site-packages/neutron/service.py:151
+2014-05-22 06:12:35.116 9298 INFO neutron.server [-] RPC was already started in parent process by plugin.
+2014-05-22 06:12:35.120 9298 INFO neutron.wsgi [-] (9298) wsgi starting up on http://0.0.0.0:9696/
+
+2014-05-22 06:12:35.166 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'l3_agent', u'binary': u'neutron-l3-agent', u'host': u'rdo', u'agent_type': u'L3 agent', u'configurations': {u'router_id': u'', u'gateway_external_network_id': u'', u'handle_internal_only_routers': True, u'use_namespaces': True, u'routers': 1, u'interfaces': 1, u'floating_ips': 0, u'interface_driver': u'neutron.agent.linux.interface.OVSInterfaceDriver', u'ex_gw_ports': 1}}}, u'time': u'2014-05-21T21:12:28.198384'}, u'_context_tenant': None, u'_unique_id': u'15a976ec64d54d59bb88dce7f90e66ec', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:22.702362', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:35.168 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:22.702362', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:35.176 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-25394ebc-7015-4524-a9b9-4bfebd5775a2', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'N/A', u'binary': u'neutron-metadata-agent', u'host': u'rdo', u'agent_type': u'Metadata agent', u'configurations': {u'nova_metadata_port': 8775, u'nova_metadata_ip': u'172.16.0.1', u'metadata_proxy_socket': u'/var/lib/neutron/metadata_proxy'}}}, u'time': u'2014-05-21T21:12:29.211082'}, u'_context_tenant': None, u'_unique_id': u'8336a9981f1f4d8683948b0bfdaec966', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:22.727830', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:35.179 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:22.727830', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-25394ebc-7015-4524-a9b9-4bfebd5775a2', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:35.182 9298 DEBUG neutron.context [req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:12:35.222 9298 DEBUG neutron.db.agents_db [req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36 None] Message with invalid timestamp received report_state /usr/lib/python2.6/site-packages/neutron/db/agents_db.py:214
+2014-05-22 06:12:35.223 9298 DEBUG neutron.context [req-25394ebc-7015-4524-a9b9-4bfebd5775a2 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:12:35.225 9298 DEBUG neutron.db.agents_db [req-25394ebc-7015-4524-a9b9-4bfebd5775a2 None] Message with invalid timestamp received report_state /usr/lib/python2.6/site-packages/neutron/db/agents_db.py:214
+2014-05-22 06:12:40.342 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-c3a43e1c-62f1-47c5-af32-c93d6906f3dd', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'dhcp_agent', u'binary': u'neutron-dhcp-agent', u'host': u'rdo', u'agent_type': u'DHCP agent', u'configurations': {u'subnets': 1, u'use_namespaces': True, u'dhcp_lease_duration': 86400, u'dhcp_driver': u'neutron.agent.linux.dhcp.Dnsmasq', u'networks': 1, u'ports': 2}}}, u'time': u'2014-05-21T21:12:40.263077'}, u'_context_tenant': None, u'_unique_id': u'075f8f36cde84c90bf61119a1014a3b4', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 21:12:40.261049', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:40.344 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 21:12:40.261049', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-c3a43e1c-62f1-47c5-af32-c93d6906f3dd', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:40.346 9298 DEBUG neutron.context [req-c3a43e1c-62f1-47c5-af32-c93d6906f3dd None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:12:54.094 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-231d0db8-dc38-419f-9e34-cb3b55b0ec39', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'N/A', u'binary': u'neutron-openvswitch-agent', u'host': u'rdo', u'agent_type': u'Open vSwitch agent', u'configurations': {u'tunnel_types': [], u'tunneling_ip': u'', u'bridge_mappings': {}, u'l2_population': False, u'devices': 2}}}, u'time': u'2014-05-21T21:12:54.028360'}, u'_context_tenant': None, u'_unique_id': u'e1f909b73bf944628c09e639fd0aa335', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:21.348479', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:54.097 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:21.348479', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-231d0db8-dc38-419f-9e34-cb3b55b0ec39', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:54.100 9298 DEBUG neutron.context [req-231d0db8-dc38-419f-9e34-cb3b55b0ec39 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:12:58.259 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'l3_agent', u'binary': u'neutron-l3-agent', u'host': u'rdo', u'agent_type': u'L3 agent', u'configurations': {u'router_id': u'', u'gateway_external_network_id': u'', u'handle_internal_only_routers': True, u'use_namespaces': True, u'routers': 1, u'interfaces': 1, u'floating_ips': 0, u'interface_driver': u'neutron.agent.linux.interface.OVSInterfaceDriver', u'ex_gw_ports': 1}}}, u'time': u'2014-05-21T21:12:58.199618'}, u'_context_tenant': None, u'_unique_id': u'1269187f2d4449339cc0a015e34e127d', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:22.702362', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:58.262 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:22.702362', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:58.264 9298 DEBUG neutron.context [req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:12:59.295 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-25394ebc-7015-4524-a9b9-4bfebd5775a2', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'N/A', u'binary': u'neutron-metadata-agent', u'host': u'rdo', u'agent_type': u'Metadata agent', u'configurations': {u'nova_metadata_port': 8775, u'nova_metadata_ip': u'172.16.0.1', u'metadata_proxy_socket': u'/var/lib/neutron/metadata_proxy'}}}, u'time': u'2014-05-21T21:12:59.240666'}, u'_context_tenant': None, u'_unique_id': u'9da617232f5d4648a691f6d60485122f', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:22.727830', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:59.296 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:22.727830', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-25394ebc-7015-4524-a9b9-4bfebd5775a2', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:12:59.298 9298 DEBUG neutron.context [req-25394ebc-7015-4524-a9b9-4bfebd5775a2 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:13:10.327 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-fea05a4c-e114-4bcc-9e93-3b912e67c488', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'dhcp_agent', u'binary': u'neutron-dhcp-agent', u'host': u'rdo', u'agent_type': u'DHCP agent', u'configurations': {u'subnets': 1, u'use_namespaces': True, u'dhcp_lease_duration': 86400, u'dhcp_driver': u'neutron.agent.linux.dhcp.Dnsmasq', u'networks': 1, u'ports': 2}}}, u'time': u'2014-05-21T21:13:10.276051'}, u'_context_tenant': None, u'_unique_id': u'51b5e14494e9410ab5661ecc2a231598', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 21:13:10.275897', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:10.330 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 21:13:10.275897', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-fea05a4c-e114-4bcc-9e93-3b912e67c488', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:10.333 9298 DEBUG neutron.context [req-fea05a4c-e114-4bcc-9e93-3b912e67c488 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:13:24.080 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-231d0db8-dc38-419f-9e34-cb3b55b0ec39', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'N/A', u'binary': u'neutron-openvswitch-agent', u'host': u'rdo', u'agent_type': u'Open vSwitch agent', u'configurations': {u'tunnel_types': [], u'tunneling_ip': u'', u'bridge_mappings': {}, u'l2_population': False, u'devices': 2}}}, u'time': u'2014-05-21T21:13:24.029653'}, u'_context_tenant': None, u'_unique_id': u'cd575cda1124497a9e2a4c6491d1f3ba', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:21.348479', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:24.081 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:21.348479', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-231d0db8-dc38-419f-9e34-cb3b55b0ec39', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:24.084 9298 DEBUG neutron.context [req-231d0db8-dc38-419f-9e34-cb3b55b0ec39 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:13:25.127 9298 INFO neutron.wsgi [-] (9298) accepted ('172.16.0.1', 45995)
+
+2014-05-22 06:13:25.131 9298 DEBUG keystoneclient.middleware.auth_token [-] Authenticating user token __call__ /usr/lib/python2.6/site-packages/keystoneclient/middleware/auth_token.py:602
+2014-05-22 06:13:25.132 9298 DEBUG keystoneclient.middleware.auth_token [-] Removing headers from request environment: X-Identity-Status,X-Domain-Id,X-Domain-Name,X-Project-Id,X-Project-Name,X-Project-Domain-Id,X-Project-Domain-Name,X-User-Id,X-User-Name,X-User-Domain-Id,X-User-Domain-Name,X-Roles,X-Service-Catalog,X-User,X-Tenant-Id,X-Tenant-Name,X-Tenant,X-Role _remove_auth_headers /usr/lib/python2.6/site-packages/keystoneclient/middleware/auth_token.py:661
+2014-05-22 06:13:25.190 9298 INFO urllib3.connectionpool [-] Starting new HTTP connection (1): 172.16.0.1
+2014-05-22 06:13:25.224 9298 DEBUG urllib3.connectionpool [-] "GET / HTTP/1.1" 300 950 _make_request /usr/lib/python2.6/site-packages/urllib3/connectionpool.py:295
+2014-05-22 06:13:25.249 9298 DEBUG keystoneclient.middleware.auth_token [-] Server reports support for api versions: v3.0, v2.0 _get_supported_versions /usr/lib/python2.6/site-packages/keystoneclient/middleware/auth_token.py:592
+2014-05-22 06:13:25.250 9298 INFO keystoneclient.middleware.auth_token [-] Auth Token confirmed use of v2.0 apis
+2014-05-22 06:13:25.253 9298 INFO urllib3.connectionpool [-] Starting new HTTP connection (1): 172.16.0.1
+2014-05-22 06:13:25.519 9298 DEBUG urllib3.connectionpool [-] "POST /v2.0/tokens HTTP/1.1" 200 4280 _make_request /usr/lib/python2.6/site-packages/urllib3/connectionpool.py:295
+2014-05-22 06:13:25.531 9298 INFO urllib3.connectionpool [-] Starting new HTTP connection (1): 172.16.0.1
+2014-05-22 06:13:25.579 9298 DEBUG urllib3.connectionpool [-] "GET /v2.0/tokens/f67d2efc232644fba6b16332ad006f29 HTTP/1.1" 200 4252 _make_request /usr/lib/python2.6/site-packages/urllib3/connectionpool.py:295
+2014-05-22 06:13:25.588 9298 DEBUG keystoneclient.middleware.auth_token [-] Storing token in cache _cache_put /usr/lib/python2.6/site-packages/keystoneclient/middleware/auth_token.py:1120
+2014-05-22 06:13:25.592 9298 DEBUG keystoneclient.middleware.auth_token [-] Received request from user: 3d003f24881548b6aebb7906a61f7683 with project_id : 831a47fac46c4b3cb78067874b2f8ce0 and roles: admin  _build_user_headers /usr/lib/python2.6/site-packages/keystoneclient/middleware/auth_token.py:909
+2014-05-22 06:13:25.617 9298 DEBUG neutron.common.utils [-] Reloading cached file /etc/neutron/policy.json read_cached_file /usr/lib/python2.6/site-packages/neutron/common/utils.py:53
+2014-05-22 06:13:25.619 9298 DEBUG neutron.policy [-] Loading policies from file: /etc/neutron/policy.json _set_rules /usr/lib/python2.6/site-packages/neutron/policy.py:89
+2014-05-22 06:13:25.822 9298 DEBUG routes.middleware [-] No route matched for GET /networks.json __call__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:97
+2014-05-22 06:13:25.867 9298 DEBUG routes.middleware [-] Matched GET /networks.json __call__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:100
+2014-05-22 06:13:25.868 9298 DEBUG routes.middleware [-] Route path: '/networks{.format}', defaults: {'action': u'index', 'controller': <wsgify at 66421200 wrapping <function resource at 0x3f44488>>} __call__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:102
+2014-05-22 06:13:25.868 9298 DEBUG routes.middleware [-] Match dict: {'action': u'index', 'controller': <wsgify at 66421200 wrapping <function resource at 0x3f44488>>, 'format': u'json'} __call__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:103
+2014-05-22 06:13:25.909 9298 INFO neutron.wsgi [req-ec7e36d8-5afa-44d1-8c73-1d67f460406e None] 172.16.0.1 - - [22/May/2014 06:13:25] "GET /v2.0/networks.json HTTP/1.1" 200 920 0.779742
+
+2014-05-22 06:13:25.914 9298 INFO neutron.wsgi [req-ec7e36d8-5afa-44d1-8c73-1d67f460406e None] (9298) accepted ('172.16.0.1', 45999)
+
+2014-05-22 06:13:25.916 9298 DEBUG keystoneclient.middleware.auth_token [-] Authenticating user token __call__ /usr/lib/python2.6/site-packages/keystoneclient/middleware/auth_token.py:602
+2014-05-22 06:13:25.916 9298 DEBUG keystoneclient.middleware.auth_token [-] Removing headers from request environment: X-Identity-Status,X-Domain-Id,X-Domain-Name,X-Project-Id,X-Project-Name,X-Project-Domain-Id,X-Project-Domain-Name,X-User-Id,X-User-Name,X-User-Domain-Id,X-User-Domain-Name,X-Roles,X-Service-Catalog,X-User,X-Tenant-Id,X-Tenant-Name,X-Tenant,X-Role _remove_auth_headers /usr/lib/python2.6/site-packages/keystoneclient/middleware/auth_token.py:661
+2014-05-22 06:13:25.923 9298 DEBUG keystoneclient.middleware.auth_token [-] Returning cached token _cache_get /usr/lib/python2.6/site-packages/keystoneclient/middleware/auth_token.py:1010
+2014-05-22 06:13:25.924 9298 DEBUG keystoneclient.middleware.auth_token [-] Received request from user: 3d003f24881548b6aebb7906a61f7683 with project_id : 831a47fac46c4b3cb78067874b2f8ce0 and roles: admin  _build_user_headers /usr/lib/python2.6/site-packages/keystoneclient/middleware/auth_token.py:909
+2014-05-22 06:13:25.927 9298 DEBUG routes.middleware [-] No route matched for GET /subnets.json __call__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:97
+2014-05-22 06:13:25.928 9298 DEBUG routes.middleware [-] Matched GET /subnets.json __call__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:100
+2014-05-22 06:13:25.928 9298 DEBUG routes.middleware [-] Route path: '/subnets{.format}', defaults: {'action': u'index', 'controller': <wsgify at 66392976 wrapping <function resource at 0x3f401b8>>} __call__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:102
+2014-05-22 06:13:25.928 9298 DEBUG routes.middleware [-] Match dict: {'action': u'index', 'controller': <wsgify at 66392976 wrapping <function resource at 0x3f401b8>>, 'format': u'json'} __call__ /usr/lib/python2.6/site-packages/Routes-1.12.3-py2.6.egg/routes/middleware.py:103
+2014-05-22 06:13:25.975 9298 INFO neutron.wsgi [req-ad9938de-196f-43cf-b0cb-7fb955ae9215 None] 172.16.0.1 - - [22/May/2014 06:13:25] "GET /v2.0/subnets.json?fields=id&fields=cidr&id=f15c310a-6274-4b97-b1af-2315b22ce9f5&id=33cd9336-26d7-4af0-851d-0a5b13b5464a HTTP/1.1" 200 348 0.059547
+
+2014-05-22 06:13:28.275 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'l3_agent', u'binary': u'neutron-l3-agent', u'host': u'rdo', u'agent_type': u'L3 agent', u'configurations': {u'router_id': u'', u'gateway_external_network_id': u'', u'handle_internal_only_routers': True, u'use_namespaces': True, u'routers': 1, u'interfaces': 1, u'floating_ips': 0, u'interface_driver': u'neutron.agent.linux.interface.OVSInterfaceDriver', u'ex_gw_ports': 1}}}, u'time': u'2014-05-21T21:13:28.199322'}, u'_context_tenant': None, u'_unique_id': u'0fb31d4074364c92a744dedce8c44db4', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:22.702362', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:28.280 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:22.702362', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:28.315 9298 DEBUG neutron.context [req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:13:29.378 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-25394ebc-7015-4524-a9b9-4bfebd5775a2', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'N/A', u'binary': u'neutron-metadata-agent', u'host': u'rdo', u'agent_type': u'Metadata agent', u'configurations': {u'nova_metadata_port': 8775, u'nova_metadata_ip': u'172.16.0.1', u'metadata_proxy_socket': u'/var/lib/neutron/metadata_proxy'}}}, u'time': u'2014-05-21T21:13:29.274981'}, u'_context_tenant': None, u'_unique_id': u'cbdbab7fac274894b549d436def8f923', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:22.727830', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:29.381 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:22.727830', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-25394ebc-7015-4524-a9b9-4bfebd5775a2', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:29.383 9298 DEBUG neutron.context [req-25394ebc-7015-4524-a9b9-4bfebd5775a2 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:13:40.389 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-6dc4069a-115c-4754-aab4-117a4510583e', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'dhcp_agent', u'binary': u'neutron-dhcp-agent', u'host': u'rdo', u'agent_type': u'DHCP agent', u'configurations': {u'subnets': 1, u'use_namespaces': True, u'dhcp_lease_duration': 86400, u'dhcp_driver': u'neutron.agent.linux.dhcp.Dnsmasq', u'networks': 1, u'ports': 2}}}, u'time': u'2014-05-21T21:13:40.309601'}, u'_context_tenant': None, u'_unique_id': u'cd95ce56329444f8bf3b1bedf2bd8379', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 21:13:40.290767', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:40.391 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 21:13:40.290767', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-6dc4069a-115c-4754-aab4-117a4510583e', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:40.395 9298 DEBUG neutron.context [req-6dc4069a-115c-4754-aab4-117a4510583e None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:13:54.080 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-231d0db8-dc38-419f-9e34-cb3b55b0ec39', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'N/A', u'binary': u'neutron-openvswitch-agent', u'host': u'rdo', u'agent_type': u'Open vSwitch agent', u'configurations': {u'tunnel_types': [], u'tunneling_ip': u'', u'bridge_mappings': {}, u'l2_population': False, u'devices': 2}}}, u'time': u'2014-05-21T21:13:54.031656'}, u'_context_tenant': None, u'_unique_id': u'4e2812e38b54486d81923003185aeb8b', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:21.348479', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:54.081 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:21.348479', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-231d0db8-dc38-419f-9e34-cb3b55b0ec39', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:54.084 9298 DEBUG neutron.context [req-231d0db8-dc38-419f-9e34-cb3b55b0ec39 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:13:58.250 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'l3_agent', u'binary': u'neutron-l3-agent', u'host': u'rdo', u'agent_type': u'L3 agent', u'configurations': {u'router_id': u'', u'gateway_external_network_id': u'', u'handle_internal_only_routers': True, u'use_namespaces': True, u'routers': 1, u'interfaces': 1, u'floating_ips': 0, u'interface_driver': u'neutron.agent.linux.interface.OVSInterfaceDriver', u'ex_gw_ports': 1}}}, u'time': u'2014-05-21T21:13:58.199813'}, u'_context_tenant': None, u'_unique_id': u'6574586497074d7287d621c145a42ad5', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:22.702362', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:58.251 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:22.702362', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:58.253 9298 DEBUG neutron.context [req-e0c5fd7b-03e6-4ac2-9033-5183a0590f36 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:13:59.356 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-25394ebc-7015-4524-a9b9-4bfebd5775a2', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'N/A', u'binary': u'neutron-metadata-agent', u'host': u'rdo', u'agent_type': u'Metadata agent', u'configurations': {u'nova_metadata_port': 8775, u'nova_metadata_ip': u'172.16.0.1', u'metadata_proxy_socket': u'/var/lib/neutron/metadata_proxy'}}}, u'time': u'2014-05-21T21:13:59.306317'}, u'_context_tenant': None, u'_unique_id': u'af7e48c55c64460ea849586ed5cbe812', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 20:11:22.727830', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:59.358 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 20:11:22.727830', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-25394ebc-7015-4524-a9b9-4bfebd5775a2', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:13:59.360 9298 DEBUG neutron.context [req-25394ebc-7015-4524-a9b9-4bfebd5775a2 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
+2014-05-22 06:14:10.358 9298 DEBUG neutron.openstack.common.rpc.amqp [-] received {u'_context_roles': [u'admin'], u'_context_request_id': u'req-5f68959e-a626-435f-ab7b-83afdf198221', u'_context_read_deleted': u'no', u'_context_user_name': None, u'_context_project_name': None, u'namespace': None, u'_context_tenant_id': None, u'args': {u'agent_state': {u'agent_state': {u'topic': u'dhcp_agent', u'binary': u'neutron-dhcp-agent', u'host': u'rdo', u'agent_type': u'DHCP agent', u'configurations': {u'subnets': 1, u'use_namespaces': True, u'dhcp_lease_duration': 86400, u'dhcp_driver': u'neutron.agent.linux.dhcp.Dnsmasq', u'networks': 1, u'ports': 2}}}, u'time': u'2014-05-21T21:14:10.290433'}, u'_context_tenant': None, u'_unique_id': u'245cf6791af044c3afa91a481187b9ca', u'_context_is_admin': True, u'version': u'1.0', u'_context_timestamp': u'2014-05-21 21:14:10.290258', u'_context_tenant_name': None, u'_context_user': None, u'_context_user_id': None, u'method': u'report_state', u'_context_project_id': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:14:10.360 9298 DEBUG neutron.openstack.common.rpc.amqp [-] unpacked context: {'project_name': None, 'user_id': None, 'roles': [u'admin'], 'tenant_id': None, 'timestamp': u'2014-05-21 21:14:10.290258', 'is_admin': True, 'read_deleted': u'no', 'request_id': u'req-5f68959e-a626-435f-ab7b-83afdf198221', 'tenant_name': None, 'project_id': None, 'user_name': None, 'tenant': None, 'user': None} _safe_log /usr/lib/python2.6/site-packages/neutron/openstack/common/rpc/common.py:280
+2014-05-22 06:14:10.365 9298 DEBUG neutron.context [req-5f68959e-a626-435f-ab7b-83afdf198221 None] Arguments dropped when creating context: {'project_name': None, 'tenant': None} __init__ /usr/lib/python2.6/site-packages/neutron/context.py:84
