@@ -1,0 +1,22 @@
+
+Windows7 + CentOS6.5è‡
+	windows install
+	centos install
+	rescue centos
+		dd if=/dev/sda2 of=cent6.bin bs=512 count=1
+		mkdir /mnt/usbmem
+		mount -t vfat /dev/sdb1 /mnt/usbmem
+		cp cent6.bin /mnt/usbmem
+		ls /mnt/usbmem
+		umount /mnt/usbmem
+	modify boot loader
+		bcdedit /create /d gCentOS 6.5-6 /application bootsector
+			ƒGƒ“ƒgƒŠ {`}‚Í³í‚Éì¬‚³‚ê‚Ü‚µ‚½B
+		bcdedit /set {`} device partition=C:
+		bcdedit /set {`} path cent6.bin
+		bcdedit /displayorder {`} /addlast
+
+QlURL
+	EWindows7 + Cent6.5
+		http://www.lotusdigital.jp/web/windows7%E3%81%A8centos6%E3%81%AE%E3%83%87%E3%83%A5%E3%82%A2%E3%83%AB%E3%83%96%E3%83%BC%E3%83%88%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89/
+

@@ -1,0 +1,10 @@
+
+blog
+	http://mizumoto-da.github.io/blog/openstack-option-and-freedom/
+
+doc
+	https://communities.vmware.com/docs/DOC-24626
+
+ova
+	http://partnerweb.vmware.com/programs/vmdkimage/vova/VOVA_ICEHOUSE.ova
+
