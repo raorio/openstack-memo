@@ -8,6 +8,8 @@ doc
 ova
 	http://partnerweb.vmware.com/programs/vmdkimage/vova/VOVA_ICEHOUSE.ova
 
+openfiler
+	http://www.openfiler.com/community/download
 
 esxi
 	
