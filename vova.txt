@@ -8,3 +8,13 @@ doc
 ova
 	http://partnerweb.vmware.com/programs/vmdkimage/vova/VOVA_ICEHOUSE.ova
 
+
+esxi
+	
+	
+	nested
+		nestして64bit仮想化可能設定
+			http://virtual.cocolog-nifty.com/virtualmachine/2013/12/esxi-on-esxi-ne.html
+		nestした場合のVLAN使用
+			https://communities.vmware.com/people/gowatana/blog/2014/02/23/%E3%83%8D%E3%82%B9%E3%83%86%E3%83%83%E3%83%89esxi-%E3%81%A7%E4%BB%AE%E6%83%B3%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81-vlan-vlan4095-%E3%81%A7-vst
+
