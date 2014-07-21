@@ -1,14 +1,16 @@
 
 TODO
+	課題
+		parent側にnova-network構築
 	問題
 		
-	
 
 refer
 	openstack install manual
 		http://docs.openstack.org/icehouse/install-guide/install/yum/content/
 		http://docs.openstack.org/icehouse/config-reference/content/section_compute-cells.html
 		http://docs.openstack.org/user-guide/content/novaclient_commands.html
+		https://wiki.openstack.org/wiki/Blueprint-nova-compute-cells
 
 	icehouse
 		parent-1
@@ -715,8 +717,8 @@ refer
 				[cells]
 				enable=True
 				name=api
-				cell_type=api
 				capabilities=hypervisor=kvm,os=linux
+				cell_type=api
 			
 			service openstack-nova-cells restart
 			
@@ -763,7 +765,7 @@ refer
 			
 			service openstack-nova-cells restart
 			
-		clc-1
+		parent-1
 			nova cell-capacities
 				Ram Available: 3313 MB
 				+---------+-------+
@@ -786,33 +788,12 @@ refer
 				| 40960    | 0     |
 				| 81920    | 0     |
 				+----------+-------+
+			
 			nova cell-show child-1
 				エラーとなった。以下に関係？
 					https://bugs.launchpad.net/nova/+bug/1312002
-			nova cell-show child-2
 			
-		clc-1
-			http://docs.openstack.org/icehouse/install-guide/install/yum/content/launch-instance-nova.html
-				
-				source demo-openrc.sh
-				
-				nova flavor-list
-				
-				nova image-list
-				
-				nova secgroup-list
-				
-				nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --security-group default demo-instance1
-				
-				nova get-vnc-console demo-instance1 novnc
-				
-				nova secgroup-add-rule default icmp -1 -1 0.0.0.0/0
-				
-				nova secgroup-add-rule default tcp 1 65535 0.0.0.0/0
-				
-				nova secgroup-add-rule default udp 1 65535 0.0.0.0/0
-				
-				compute nodeからインスタンスにping/sshが接続できることを確認。
+			nova cell-show child-2
 			
 		parent-1
 			http://docs.openstack.org/icehouse/install-guide/install/yum/content/nova-networking-controller-node.html
@@ -857,13 +838,28 @@ refer
 				
 				reboot
 				
-		clc-1
+		parent-1
+			reboot
+			
+		child-1-1
+			reboot
+			
+		child-1-1
+			reboot
+			
+		parent-1
 			http://docs.openstack.org/icehouse/install-guide/install/yum/content/nova-network-initial-network.html
 				
 				source admin-openrc.sh
 				
 				nova network-create demo-net --bridge br100 --multi-host T --fixed-range-v4 192.168.238.24/29
 					エラーとなる。各child cellでnova-manage network createを実行する
+					本来は、parentでnova-network(neutronは?)を稼働させるべき?な感じ。後でやり直し。
+						https://etherpad.openstack.org/p/FolsomComputeCells
+							Will networking work across cell boundaries transparently?
+							A: There's probably some work for network and volumes to tie this in right now. We don't know use cases yet. Nova-network needs to run on the API cell, but this is really just for the network API extensin.
+						http://comstud.com/GrizzlyCells.pdf
+							P6では、各子cellにnova-networkが存在しているが。。。
 				
 		child-1
 			nova-manage network create --label demo-net --fixed_range_v4=192.168.238.24/29 --bridge=br100 --bridge_interface=eth2 --multi_host=T
@@ -877,7 +873,32 @@ refer
 				id      IPv4                    IPv6            start address   DNS1            DNS2            VlanID          project         uuid
 				1       192.168.238.24/29       None            192.168.238.26  8.8.4.4         None            None            None            ef0e69b4-bf9b-4ed4-a92e-3f0e546190a2
 				
+		parent-1
 			http://docs.openstack.org/icehouse/install-guide/install/yum/content/launch-instance-nova.html
+				nova service list
+					+------------------+----------------------------------------+----------+---------+-------+----------------------------+-----------------+
+					| Binary           | Host                                   | Zone     | Status  | State | Updated_at                 | Disabled Reason |
+					+------------------+----------------------------------------+----------+---------+-------+----------------------------+-----------------+
+					| nova-consoleauth | api!child-2@openstack-i-cell-child-1-2 | internal | enabled | up    | 2014-07-21T12:04:01.000000 | -               |
+					| nova-scheduler   | api!child-2@openstack-i-cell-child-1-2 | internal | enabled | up    | 2014-07-21T12:04:01.000000 | -               |
+					| nova-cert        | api!child-2@openstack-i-cell-child-1-2 | internal | enabled | up    | 2014-07-21T12:04:01.000000 | -               |
+					| nova-conductor   | api!child-2@openstack-i-cell-child-1-2 | internal | enabled | up    | 2014-07-21T12:04:01.000000 | -               |
+					| nova-compute     | api!child-2@openstack-i-cell-child-1-2 | nova     | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					| nova-cells       | api!child-2@openstack-i-cell-child-1-2 | internal | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					| nova-network     | api!child-2@openstack-i-cell-child-1-2 | internal | enabled | up    | 2014-07-21T12:04:05.000000 | -               |
+					| nova-consoleauth | api!child-1@openstack-i-cell-child-1-1 | internal | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					| nova-conductor   | api!child-1@openstack-i-cell-child-1-1 | internal | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					| nova-cert        | api!child-1@openstack-i-cell-child-1-1 | internal | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					| nova-scheduler   | api!child-1@openstack-i-cell-child-1-1 | internal | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					| nova-cells       | api!child-1@openstack-i-cell-child-1-1 | internal | enabled | up    | 2014-07-21T12:04:04.000000 | -               |
+					| nova-compute     | api!child-1@openstack-i-cell-child-1-1 | nova     | enabled | up    | 2014-07-21T12:04:09.000000 | -               |
+					| nova-network     | api!child-1@openstack-i-cell-child-1-1 | internal | enabled | up    | 2014-07-21T12:04:02.000000 | -               |
+					| nova-conductor   | api@openstack-i-cell-parent-1          | internal | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					| nova-consoleauth | api@openstack-i-cell-parent-1          | internal | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					| nova-cert        | api@openstack-i-cell-parent-1          | internal | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					| nova-cells       | api@openstack-i-cell-parent-1          | internal | enabled | up    | 2014-07-21T12:04:03.000000 | -               |
+					+------------------+----------------------------------------+----------+---------+-------+----------------------------+-----------------+
+					TODO api側はcells以外不要かも
 				
 				source demo-openrc.sh
 				
@@ -902,12 +923,12 @@ refer
 					ネットワーク作成済み、プロジェクト割り当て済み(デフォルト空きネットワークを取得？だったかな)
 				
 				nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --nic net-id=8c4594c2-f0d5-492c-9481-3455fc9c2384 --security-group default demo-instance1
-					zone指定でcell内のノード指定は可能?うまくいかない。
+					zone指定でcell内のノード指定は可能?現状やり方が不明だし、ホスト指定だとうまくいかない。
 						nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --security-group default --availability-zone nova:openstack-i-cell-child-1-1 demo-instance1
 						nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --security-group default --availability-zone nova:openstack-i-cell-child-1-2 demo-instance1
 						
 						nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --nic net-id=8c4594c2-f0d5-492c-9481-3455fc9c2384 --security-group default --availability-zone nova:openstack-i-cell-child-1-1 demo-instance1
-						nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --nic net-id= --security-group default --availability-zone nova:openstack-i-cell-child-1-2 demo-instance1
+						nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --nic net-id=ef0e69b4-bf9b-4ed4-a92e-3f0e546190a2 --security-group default --availability-zone nova:openstack-i-cell-child-1-2 demo-instance1
 				
 				子セル側にうまく設定できない気がする。
 				nova get-vnc-console demo-instance1 novnc
