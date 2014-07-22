@@ -12,6 +12,13 @@ refer
 		http://docs.openstack.org/user-guide/content/novaclient_commands.html
 		https://wiki.openstack.org/wiki/Blueprint-nova-compute-cells
 
+etc
+	icehouse\nova-cells\
+		parent-1
+		child-1-1
+		child-1-2
+
+ç\íz
 	icehouse
 		parent-1
 			os: centos 6.5 x86_64
