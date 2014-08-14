@@ -874,6 +874,9 @@ etc
 		parent-1
 			http://docs.openstack.org/icehouse/install-guide/install/yum/content/nova-networking-controller-node.html
 				
+				TODO
+				セキュリティグループは設定しないほうがよい?
+				
 				openstack-config --set /etc/nova/nova.conf DEFAULT network_api_class nova.network.api.API
 				openstack-config --set /etc/nova/nova.conf DEFAULT security_group_api nova
 				
@@ -882,6 +885,9 @@ etc
 				
 		child-1-1 and child-1-2
 			http://docs.openstack.org/icehouse/install-guide/install/yum/content/nova-networking-controller-node.html
+				
+				TODO
+				セキュリティグループは設定しないほうがよい?
 				
 				openstack-config --set /etc/nova/nova.conf DEFAULT network_api_class nova.network.api.API
 				openstack-config --set /etc/nova/nova.conf DEFAULT security_group_api nova
@@ -1054,12 +1060,9 @@ etc
 					ネットワーク作成済み、プロジェクト割り当て済み(デフォルト空きネットワークを取得？だったかな)
 				
 				nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --nic net-id=8c4594c2-f0d5-492c-9481-3455fc9c2384 --security-group default demo-instance1
-					zone指定でcell内のノード指定は可能?現状やり方が不明だし、ホスト指定だとうまくいかない。
-						nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --security-group default --availability-zone nova:openstack-i-cell-child-1-1 demo-instance1
-						nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --security-group default --availability-zone nova:openstack-i-cell-child-1-2 demo-instance1
-						
-						nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --nic net-id=8c4594c2-f0d5-492c-9481-3455fc9c2384 --security-group default --availability-zone nova:openstack-i-cell-child-1-1 demo-instance1
-						nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --nic net-id=ef0e69b4-bf9b-4ed4-a92e-3f0e546190a2 --security-group default --availability-zone nova:openstack-i-cell-child-1-2 demo-instance1
+				
+				nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --nic net-id=8c4594c2-f0d5-492c-9481-3455fc9c2384 --security-group default --hint target_cell='api!child-1' demo-instance1_1
+				nova boot --flavor m1.tiny --image cirros-0.3.2-x86_64 --nic net-id=ef0e69b4-bf9b-4ed4-a92e-3f0e546190a2 --security-group default --hint target_cell='api!child-2' demo-instance2_1
 				
 				子セル側にうまく設定できない気がする。
 				nova get-vnc-console demo-instance1 novnc
@@ -1072,3 +1075,54 @@ etc
 				
 				compute nodeからインスタンスにping/sshが接続できることを確認。
 				
+	flavorのテスト
+		parent-1
+			nova-manage flavor list
+				m1.medium: Memory: 4096MB, VCPUS: 2, Root: 40GB, Ephemeral: 0Gb, FlavorID: 3, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.tiny: Memory: 512MB, VCPUS: 1, Root: 1GB, Ephemeral: 0Gb, FlavorID: 1, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.large: Memory: 8192MB, VCPUS: 4, Root: 80GB, Ephemeral: 0Gb, FlavorID: 4, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.xlarge: Memory: 16384MB, VCPUS: 8, Root: 160GB, Ephemeral: 0Gb, FlavorID: 5, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.small: Memory: 2048MB, VCPUS: 1, Root: 20GB, Ephemeral: 0Gb, FlavorID: 2, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+			
+			parent and childでフレーバーを作成
+				nova-manage flavor create test6 1024MB 1 10 0 6
+					parentで作成しないとnova boot時に以下のエラーとなる
+						ERROR: No flavor with a name or ID of 'x' exists.
+			
+		child-1-1
+			nova-manage flavor list
+				m1.medium: Memory: 4096MB, VCPUS: 2, Root: 40GB, Ephemeral: 0Gb, FlavorID: 3, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.tiny: Memory: 512MB, VCPUS: 1, Root: 1GB, Ephemeral: 0Gb, FlavorID: 1, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.large: Memory: 8192MB, VCPUS: 4, Root: 80GB, Ephemeral: 0Gb, FlavorID: 4, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.xlarge: Memory: 16384MB, VCPUS: 8, Root: 160GB, Ephemeral: 0Gb, FlavorID: 5, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.small: Memory: 2048MB, VCPUS: 1, Root: 20GB, Ephemeral: 0Gb, FlavorID: 2, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+			
+			parent and childでフレーバーを作成
+				nova-manage flavor create test6 1024MB 1 10 0 6
+					childで作成しないとnova boot時に以下のエラーとなる
+						Error: Flavor x could not be found.
+			
+		child-1-2
+			nova-manage flavor list
+				m1.medium: Memory: 4096MB, VCPUS: 2, Root: 40GB, Ephemeral: 0Gb, FlavorID: 3, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.tiny: Memory: 512MB, VCPUS: 1, Root: 1GB, Ephemeral: 0Gb, FlavorID: 1, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.large: Memory: 8192MB, VCPUS: 4, Root: 80GB, Ephemeral: 0Gb, FlavorID: 4, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.xlarge: Memory: 16384MB, VCPUS: 8, Root: 160GB, Ephemeral: 0Gb, FlavorID: 5, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+				m1.small: Memory: 2048MB, VCPUS: 1, Root: 20GB, Ephemeral: 0Gb, FlavorID: 2, Swap: 0MB, RXTX Factor: 1.0, public, ExtraSpecs {}
+			
+			parent and childでフレーバーを作成
+				nova-manage flavor create test6 1024MB 1 10 0 6
+					childで作成しないとnova boot時に以下のエラーとなる
+						Error: Flavor x could not be found.
+			
+		parent-1
+			nova boot --flavor test6 --image cirros-0.3.2-x86_64 --nic net-id=8c4594c2-f0d5-492c-9481-3455fc9c2384 --security-group default --hint target_cell='api!child-1' demo-instance1_1
+			nova boot --flavor test6 --image cirros-0.3.2-x86_64 --nic net-id=ef0e69b4-bf9b-4ed4-a92e-3f0e546190a2 --security-group default --hint target_cell='api!child-2' demo-instance2_1
+			
+			フレーバーに指定するID or 名前は、注意が必要そう
+				nova-manageで作成した順にIDが、parentとchildの連携のIDとして使われている。
+				オプションで指定したIDは、連携には使われていなさそう。
+				parentでcreate後deleteし、またcreateすると、同じようにchildでもcreate後deleteし、またcreateする必要がある。
+				そうしなければ、不一致となり、存在しない場合、以下のようなエラーとなる。また、存在する場合、別のフレーバーとして作成される可能性がある。
+					Error: Flavor x could not be found.
+
