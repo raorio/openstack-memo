@@ -12,4 +12,7 @@ network
 			192.168.10.61/24	openstack-i-cell-parent-1
 			192.168.10.62/24	openstack-i-cell-child-1-1
 			192.168.10.63/24	openstack-i-cell-child-1-2
+			
+			192.168.10.51/24	OSSTest1
+			
 
