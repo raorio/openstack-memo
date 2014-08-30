@@ -309,6 +309,7 @@ refer
 			cpu: 2
 			memory: 4 GB
 			disk: 40 GB
+			disk: 40 GB
 			3nic:
 				eth0: 192.168.116.92(nat)
 				eth1: 192.168.10.92(bridge)
@@ -557,3 +558,336 @@ refer
 					}
 			
 			
+		clc-1
+			http://docs.openstack.org/icehouse/install-guide/install/yum/content/cinder-controller.html
+			
+				yum -y install openstack-cinder
+				
+				openstack-config --set /etc/cinder/cinder.conf database connection mysql://cinder:CINDER_DBPASS@openstack-i-clc-1/cinder
+				
+				mysql -u root -puser1
+					CREATE DATABASE cinder;
+					GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'localhost' IDENTIFIED BY 'CINDER_DBPASS';
+					GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'%' IDENTIFIED BY 'CINDER_DBPASS';
+					exit;
+				
+				su -s /bin/sh -c "cinder-manage db sync" cinder
+				
+				keystone user-create --name=cinder --pass=CINDER_PASS --email=cinder@example.com
+					+----------+----------------------------------+
+					| Property |              Value               |
+					+----------+----------------------------------+
+					|  email   |        cinder@example.com        |
+					| enabled  |               True               |
+					|    id    | 6d0c8991da66420ca14bd3ef22c90025 |
+					|   name   |              cinder              |
+					| username |              cinder              |
+					+----------+----------------------------------+
+				keystone user-role-add --user=cinder --tenant=service --role=admin
+				
+				openstack-config --set /etc/cinder/cinder.conf DEFAULT auth_strategy keystone
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_uri http://openstack-i-clc-1:5000
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_host openstack-i-clc-1
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_protocol http
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_port 35357
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken admin_user cinder
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken admin_tenant_name service
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken admin_password CINDER_PASS
+				
+				openstack-config --set /etc/cinder/cinder.conf DEFAULT rpc_backend cinder.openstack.common.rpc.impl_qpid
+				openstack-config --set /etc/cinder/cinder.conf DEFAULT qpid_hostname openstack-i-clc-1
+				
+				keystone service-create --name=cinder --type=volume --description="OpenStack Block Storage"
+					+-------------+----------------------------------+
+					|   Property  |              Value               |
+					+-------------+----------------------------------+
+					| description |     OpenStack Block Storage      |
+					|   enabled   |               True               |
+					|      id     | ffb81baf2ac44aedb62028f988bd2d1e |
+					|     name    |              cinder              |
+					|     type    |              volume              |
+					+-------------+----------------------------------+
+				keystone endpoint-create --service-id=$(keystone service-list | awk '/ volume / {print $2}') --publicurl=http://openstack-i-clc-1:8776/v1/%\(tenant_id\)s --internalurl=http://openstack-i-clc-1:8776/v1/%\(tenant_id\)s --adminurl=http://openstack-i-clc-1:8776/v1/%\(tenant_id\)s
+					+-------------+------------------------------------------------+
+					|   Property  |                     Value                      |
+					+-------------+------------------------------------------------+
+					|   adminurl  | http://openstack-i-clc-1:8776/v1/%(tenant_id)s |
+					|      id     |        80825b4095744aa19a75dd61ff98cd07        |
+					| internalurl | http://openstack-i-clc-1:8776/v1/%(tenant_id)s |
+					|  publicurl  | http://openstack-i-clc-1:8776/v1/%(tenant_id)s |
+					|    region   |                   regionOne                    |
+					|  service_id |        ffb81baf2ac44aedb62028f988bd2d1e        |
+					+-------------+------------------------------------------------+
+				
+				keystone service-create --name=cinderv2 --type=volumev2 --description="OpenStack Block Storage v2"
+					+-------------+----------------------------------+
+					|   Property  |              Value               |
+					+-------------+----------------------------------+
+					| description |    OpenStack Block Storage v2    |
+					|   enabled   |               True               |
+					|      id     | a3f35833843040ddb4cee75af5fcc325 |
+					|     name    |             cinderv2             |
+					|     type    |             volumev2             |
+					+-------------+----------------------------------+
+				keystone endpoint-create --service-id=$(keystone service-list | awk '/ volumev2 / {print $2}') --publicurl=http://openstack-i-clc-1:8776/v2/%\(tenant_id\)s --internalurl=http://openstack-i-clc-1:8776/v2/%\(tenant_id\)s --adminurl=http://openstack-i-clc-1:8776/v2/%\(tenant_id\)s
+					+-------------+------------------------------------------------+
+					|   Property  |                     Value                      |
+					+-------------+------------------------------------------------+
+					|   adminurl  | http://openstack-i-clc-1:8776/v2/%(tenant_id)s |
+					|      id     |        516bb38392b44b97ad0ba61dd483904a        |
+					| internalurl | http://openstack-i-clc-1:8776/v2/%(tenant_id)s |
+					|  publicurl  | http://openstack-i-clc-1:8776/v2/%(tenant_id)s |
+					|    region   |                   regionOne                    |
+					|  service_id |        a3f35833843040ddb4cee75af5fcc325        |
+					+-------------+------------------------------------------------+
+				
+				service openstack-cinder-api start
+				service openstack-cinder-scheduler start
+				chkconfig openstack-cinder-api on
+				chkconfig openstack-cinder-scheduler on
+		
+		cn-1-1
+			http://docs.openstack.org/icehouse/install-guide/install/yum/content/cinder-node.html
+			
+				pvcreate /dev/sdb
+				vgcreate cinder-volumes /dev/sdb
+				
+				vi /etc/lvm/lvm.conf
+					devices {
+					...
+					filter = [ "a/sda1/", "a/sdb/", "r/.*/"]
+					...
+					}
+				
+				pvdisplay
+					  --- Physical volume ---
+					  PV Name               /dev/sdb
+					  VG Name               cinder-volumes
+					  PV Size               40.00 GiB / not usable 4.00 MiB
+					  Allocatable           yes
+					  PE Size               4.00 MiB
+					  Total PE              10239
+					  Free PE               10239
+					  Allocated PE          0
+					  PV UUID               rIJBoz-O2aa-MlhK-b0eh-UsB0-s8M0-eSPRfj
+				
+				yum -y install openstack-cinder scsi-target-utils
+				
+				openstack-config --set /etc/cinder/cinder.conf DEFAULT auth_strategy keystone
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_uri http://openstack-i-clc-1:5000
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_host openstack-i-clc-1
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_protocol http
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_port 35357
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken admin_user cinder
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken admin_tenant_name service
+				openstack-config --set /etc/cinder/cinder.conf keystone_authtoken admin_password CINDER_PASS
+				
+				openstack-config --set /etc/cinder/cinder.conf DEFAULT rpc_backend cinder.openstack.common.rpc.impl_qpid
+				openstack-config --set /etc/cinder/cinder.conf DEFAULT qpid_hostname openstack-i-clc-1
+				
+				openstack-config --set /etc/cinder/cinder.conf database connection mysql://cinder:CINDER_DBPASS@openstack-i-clc-1/cinder
+				
+				openstack-config --set /etc/cinder/cinder.conf DEFAULT glance_host openstack-i-clc-1
+				
+				vi /etc/tgt/targets.conf
+					include /etc/cinder/volumes/*
+				
+				service openstack-cinder-volume start
+				service tgtd start
+				chkconfig openstack-cinder-volume on
+				chkconfig tgtd on
+				
+				vgdisplay
+				
+		clc-1
+			http://docs.openstack.org/icehouse/install-guide/install/yum/content/cinder-verify.html
+				source demo-openrc.sh
+				
+				cinder create --display-name myVolume 1
+					+---------------------+--------------------------------------+
+					|       Property      |                Value                 |
+					+---------------------+--------------------------------------+
+					|     attachments     |                  []                  |
+					|  availability_zone  |                 nova                 |
+					|       bootable      |                false                 |
+					|      created_at     |      2014-08-30T13:42:47.303373      |
+					| display_description |                 None                 |
+					|     display_name    |               myVolume               |
+					|      encrypted      |                False                 |
+					|          id         | 63357a8b-9e68-4331-b098-b5db2e844cfe |
+					|       metadata      |                  {}                  |
+					|         size        |                  1                   |
+					|     snapshot_id     |                 None                 |
+					|     source_volid    |                 None                 |
+					|        status       |               creating               |
+					|     volume_type     |                 None                 |
+					+---------------------+--------------------------------------+
+				
+				cinder list
+					+--------------------------------------+-----------+--------------+------+-------------+----------+-------------+
+					|                  ID                  |   Status  | Display Name | Size | Volume Type | Bootable | Attached to |
+					+--------------------------------------+-----------+--------------+------+-------------+----------+-------------+
+					| 63357a8b-9e68-4331-b098-b5db2e844cfe | available |   myVolume   |  1   |     None    |  false   |             |
+					+--------------------------------------+-----------+--------------+------+-------------+----------+-------------+
+				
+		cn-1-1
+				vgdisplay
+					  --- Volume group ---
+					  VG Name               cinder-volumes
+					  System ID
+					  Format                lvm2
+					  Metadata Areas        1
+					  Metadata Sequence No  2
+					  VG Access             read/write
+					  VG Status             resizable
+					  MAX LV                0
+					  Cur LV                1
+					  Open LV               0
+					  Max PV                0
+					  Cur PV                1
+					  Act PV                1
+					  VG Size               40.00 GiB
+					  PE Size               4.00 MiB
+					  Total PE              10239
+					  Alloc PE / Size       256 / 1.00 GiB
+					  Free  PE / Size       9983 / 39.00 GiB
+					  VG UUID               LoM1du-Iheu-dSRv-VYVD-xxVz-n9RU-0XS5ju
+				
+				インスタンスを作成しておく
+					...(略)
+				
+				nova list
+					+--------------------------------------+----------------+--------+------------+-------------+-------------------------+
+					| ID                                   | Name           | Status | Task State | Power State | Networks                |
+					+--------------------------------------+----------------+--------+------------+-------------+-------------------------+
+					| 9219923a-c335-4752-8434-10a5cbbb0e22 | demo-instance1 | ACTIVE | -          | Running     | demo-net=192.168.238.26 |
+					+--------------------------------------+----------------+--------+------------+-------------+-------------------------+
+				
+				nova volume-attach demo-instance1 63357a8b-9e68-4331-b098-b5db2e844cfe /dev/vdc
+				
+				インスタンスに接続し、スーパーユーザになる
+					...(略)
+					
+					ls /dev/vd*
+						/dev/vda   /dev/vda1  /dev/vdb
+					fdisk /dev/vdb
+						新しいディスクを作成
+							...(略)
+					
+					ls /dev/vd*
+						/dev/vda   /dev/vda1  /dev/vdb   /dev/vdb1
+					mkfs.ext4 /dev/vdb1
+					mount -t ext4 /dev/vdb1 /mnt/vdb1
+				
+			ボリュームの接続方法
+				ls -l /dev/disk/by-path/ip-192.168.10.92\:3260-iscsi-iqn.2010-10.org.openstack\:volume-63357a8b-9e68-4331-b098-b5db2e844cfe-lun-1
+					lrwxrwxrwx. 1 root root 9 Aug 30 07:03 /dev/disk/by-path/ip-192.168.10.92:3260-iscsi-iqn.2010-10.org.openstack:volume-63357a8b-9e68-4331-b098-b5db2e844cfe-lun-  -> ../../sdc
+				ls /dev/sdc -la
+					brw-rw----. 1 qemu qemu 8, 32 Aug 30 07:13 /dev/sdc
+				アタッチ済みのボリュームは、/dev/sdcとして見えている。
+				
+				nova volume-detach demo-instance1 63357a8b-9e68-4331-b098-b5db2e844cfe
+			
+			ボリュームのバックアップ方法
+				upload-to-image
+					Upload volume to image service as image.
+					http://docs.openstack.org/user-guide/content/cinderclient_commands.html
+						cinder upload-to-image [--force <True|False>]
+							[--container-format <container-format>]
+							[--disk-format <disk-format>]
+							<volume> <image-name>
+					
+					cinder upload-to-image 63357a8b-9e68-4331-b098-b5db2e844cfe myVolume-upload-1
+						ERROR: Invalid volume: Volume status is in-use. (HTTP 400) (Request-ID: req-170f94a5-3a97-4a9d-aa10-5558288261e7)
+							statusがin-useだとエラーとなる。この場合、forceオプションを付ければよい。
+					cinder upload-to-image --force True 63357a8b-9e68-4331-b098-b5db2e844cfe myVolume-upload-1
+						+---------------------+--------------------------------------+
+						|       Property      |                Value                 |
+						+---------------------+--------------------------------------+
+						|   container_format  |                 bare                 |
+						|     disk_format     |                 raw                  |
+						| display_description |                 None                 |
+						|          id         | 63357a8b-9e68-4331-b098-b5db2e844cfe |
+						|       image_id      | 88f1dbc3-ac19-4095-b950-4832f31f5fd6 |
+						|      image_name     |          myVolume-upload-1           |
+						|         size        |                  1                   |
+						|        status       |              uploading               |
+						|      updated_at     |      2014-08-30T14:03:41.000000      |
+						|     volume_type     |                 None                 |
+						+---------------------+--------------------------------------+
+					cinder upload-to-image --force True --disk-format qcow2 63357a8b-9e68-4331-b098-b5db2e844cfe myVolume-upload-qcow2-1
+						+---------------------+--------------------------------------+
+						|       Property      |                Value                 |
+						+---------------------+--------------------------------------+
+						|   container_format  |                 bare                 |
+						|     disk_format     |                qcow2                 |
+						| display_description |                 None                 |
+						|          id         | 63357a8b-9e68-4331-b098-b5db2e844cfe |
+						|       image_id      | 9907b396-c72e-4da1-9de1-01b094364eed |
+						|      image_name     |       myVolume-upload-qcow2-1        |
+						|         size        |                  1                   |
+						|        status       |              uploading               |
+						|      updated_at     |      2014-08-30T14:16:24.000000      |
+						|     volume_type     |                 None                 |
+						+---------------------+--------------------------------------+
+					glance index
+						ID                                   Name                           Disk Format          Container Format     Size
+						------------------------------------ ------------------------------ -------------------- -------------------- --------------
+						9907b396-c72e-4da1-9de1-01b094364eed myVolume-upload-qcow2-1        qcow2                bare                        1376256
+						88f1dbc3-ac19-4095-b950-4832f31f5fd6 myVolume-upload-1              raw                  bare                     1073741824
+						52ec8b03-1b9e-4892-91d4-b2d492ff6c19 cirros-0.3.2-x86_64            qcow2                bare                       13167616
+					nova image-list
+						+--------------------------------------+-------------------------+--------+--------+
+						| ID                                   | Name                    | Status | Server |
+						+--------------------------------------+-------------------------+--------+--------+
+						| 52ec8b03-1b9e-4892-91d4-b2d492ff6c19 | cirros-0.3.2-x86_64     | ACTIVE |        |
+						| 88f1dbc3-ac19-4095-b950-4832f31f5fd6 | myVolume-upload-1       | ACTIVE |        |
+						| 9907b396-c72e-4da1-9de1-01b094364eed | myVolume-upload-qcow2-1 | ACTIVE |        |
+						+--------------------------------------+-------------------------+--------+--------+
+					ls -l /var/lib/glance/images/
+						total 1061440
+						-rw-r-----. 1 glance glance   13167616 Jul 10 06:46 52ec8b03-1b9e-4892-91d4-b2d492ff6c19
+						-rw-r-----. 1 glance glance 1073741824 Aug 30 07:16 88f1dbc3-ac19-4095-b950-4832f31f5fd6
+					glanceにアップロードされたイメージをkvmでディスクとして接続し参照すると、正しく中身が見えた。
+					
+				
+				backup-create
+					http://docs.openstack.org/user-guide/content/cinderclient_commands.html
+						cinder backup-create [--container <container>]
+							[--display-name <display-name>]
+							[--display-description <display-description>]
+							<volume>
+					http://docs.openstack.org/grizzly/openstack-block-storage/admin/content/block_storage_overview.html
+						A Backup is an archived copy of a Volume currently stored in Object Storage (Swift).
+							バックアップはSWIFTの中に格納される、現在のボリュームのコピーアーカイブ。とある。
+				
+				qemu-img
+					cinder upload-to-image中に以下プロセスのコマンドが参照できたので、openstack起動しなくても障害時等に使えそう。
+						sudo cinder-rootwrap /etc/cinder/rootwrap.conf qemu-img convert -O qcow2 /dev/mapper/cinder--volumes-volume--63357a8b--9e68--4331--b098--b5db2e844cfe /var/lib/cinder/conversion/tmp6kCIxl
+					
+					qemu-img convert -O qcow2 /dev/mapper/cinder--volumes-volume--63357a8b--9e68--4331--b098--b5db2e844cfe /tmp/disk1.img
+					
+					/dev/mapper/cinder--volumes-volume--*がcinderが起動していない状態でもできていて、qemu-imgで変換可能かテスト
+						chkconfig openstack-cinder-volume off
+						reboot
+						ps aux | grep cinder
+						ls /dev/mapper/cinder--volumes-volume--*
+						qemu-img convert -O qcow2 /dev/mapper/cinder--volumes-volume--63357a8b--9e68--4331--b098--b5db2e844cfe /tmp/disk2.img
+						ls -la /tmp/disk*.img
+							-rw-r--r--. 1 root root 1441792 Aug 30 08:24 /tmp/disk1.img
+							-rw-r--r--. 1 root root 1441792 Aug 30 08:33 /tmp/disk2.img
+					
+					/dev/mapper/cinder--volumes-volume--*がtgtdが起動していない状態でもできていて、qemu-imgで変換可能かテスト
+						chkconfig tgtd off
+						reboot
+						ps aux | grep tgtd
+						ls /dev/mapper/cinder--volumes-volume--*
+						qemu-img convert -O qcow2 /dev/mapper/cinder--volumes-volume--63357a8b--9e68--4331--b098--b5db2e844cfe /tmp/disk3.img
+						ls -la /tmp/disk*.img
+							-rw-r--r--. 1 root root 1441792 Aug 30 08:24 /tmp/disk1.img
+							-rw-r--r--. 1 root root 1441792 Aug 30 08:33 /tmp/disk2.img
+							-rw-r--r--. 1 root root 1441792 Aug 30 08:41 /tmp/disk3.img
+				
+				バックアップ作成：20140830_cinder_installed
+				
+
