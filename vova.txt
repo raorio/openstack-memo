@@ -1,4 +1,91 @@
 
+env
+	http://cloudarchitectmusings.com/2013/12/16/installing-the-vsphere-openstack-virtual-appliance-vova-on-your-laptop-part-1/
+		vShpere Server
+			network
+				192.168.116.41
+				192.168.10.41
+			install
+				192.168.116.41
+				Default-First-Site
+			create data center
+				Administrator@vsphere.local
+				data center
+					vova
+				clustor
+					openstack
+			esxi(parent)を直下に接続
+			上記の設定例
+				vShpere Server
+					vova
+						openstack
+							192.168.116.44
+						192.168.116.43
+		esxi(parent)
+			install
+				2nicになるように構築
+			network
+				192.168.116.43
+					br100
+				192.168.10.43
+					consol -> Configure Management Network -> network adapter -> 2つのうち一つは無効([ ])に
+					Configuration -> Networking -> create network -> VMKernel -> IP設定
+					上記で作成したネットワークに追加 -> Properties... -> VMNetwork
+		esxi(nest)
+			install
+				2nicになるように構築
+			network
+				192.168.116.44
+					br100
+				192.168.10.44
+					consol -> Configure Management Network -> network adapter -> 2つのうち一つは無効([ ])に
+					Configuration -> Networking -> create network -> VMKernel -> IP設定
+		vova
+			deploy(vCenter Serverに接続し、直下のESXiにデプロイ)
+				Disk Format
+					Thin Provision
+						容量を使っている分にできるので抑えれるから
+				Networking Mapping
+					Mgmt Network
+				Properties
+					VMWare Driver Configuration
+						vCenter Host
+							192.168.116.41
+						vCenter Port
+							443
+						UserName
+							Administrator@vsphere.local
+						Password
+							
+						Datacenter Name
+							openstack
+						Cluster List
+							192.168.116.44
+						Glance Datastore Name
+							
+						DataStore Pattern
+							
+					Network Configuration
+						Default Gateway
+							192.168.116.2
+						DNS
+							192.168.116.2
+						IP address
+							192.168.116.45
+						Mgmt Network Netmask
+			network
+				192.168.116.45
+				192.168.10.45
+			login
+				root
+				vmware
+			http://192.168.116.42/
+				admin
+				vmware
+			https://192.168.116.42:5480
+				root
+				vmware
+
 blog
 	http://mizumoto-da.github.io/blog/openstack-option-and-freedom/
 
