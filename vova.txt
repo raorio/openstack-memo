@@ -73,6 +73,7 @@ env
 						IP address
 							192.168.116.45
 						Mgmt Network Netmask
+							255.255.255.0
 			network
 				192.168.116.45
 				192.168.10.45

@@ -1,0 +1,175 @@
+
+refer
+	icehouse rdo
+		http://ja.community.dell.com/techcenter/b/weblog/archive/2015/03/16/openstack-ironic-part1
+			os: centos 7 x86_64
+			cpu: 2
+			memory: 4 GB
+			disk: 80 GB
+			3nic:
+				eth0: 192.168.116.31(nat)
+				eth1: 192.168.10.31(bridge)
+				eth2: 192.168.238.31(host only)
+			install: network
+				url: http://ftp.riken.jp/Linux/centos/7/os/x86_64/
+				root password: centos
+				type: desktop
+				user: user1
+				user password: user1
+			setup:
+				login root
+				必要があればproxy設定
+					vi /etc/yum.conf
+						http_proxy=
+				vi /etc/hosts
+					#192.168.116.81 openstack-i-rdo-1
+					192.168.10.81 openstack-i-rdo-1
+					#192.168.238.81 openstack-i-rdo-1
+				vi /etc/sysconfig/network
+					NETWORKING=yes
+					#HOSTNAME=localhost.localdomain
+					HOSTNAME=openstack-i-rdo-1
+				vi /etc/sysconfig/network-scripts/ifcfg-eth0
+					DEVICE="eth0"
+					#BOOTPROTO="dhcp"
+					BOOTPROTO="static"
+					HWADDR="00:0C:29:BC:06:E5"
+					IPV6INIT="yes"
+					NM_CONTROLLED="yes"
+					ONBOOT="yes"
+					TYPE="Ethernet"
+					UUID="7fce2f22-528c-4915-901e-4f90f014ecc4"
+					IPADDR=192.168.116.81
+					PREFIX=24
+				vi /etc/sysconfig/network-scripts/ifcfg-eth1
+					EVICE=eth1
+					HWADDR=00:0C:29:BC:06:EF
+					TYPE=Ethernet
+					UUID=f4907d33-7c50-4cd0-90ca-e0a83d551a40
+					ONBOOT=yes
+					NM_CONTROLLED=yes
+					#BOOTPROTO=dhcp
+					BOOTPROTO=static
+					IPADDR=192.168.10.81
+					PREFIX=24
+					GATEWAY=192.168.10.1
+					DNS1=192.168.10.1
+				vi /etc/sysconfig/network-scripts/ifcfg-eth2
+					DEVICE=eth2
+					HWADDR=00:0C:29:BC:06:F9
+					TYPE=Ethernet
+					UUID=ce1967ce-a970-4ce1-98d4-acd8cf617829
+					ONBOOT=yes
+					#NM_CONTROLLED=yes
+					#BOOTPROTO=dhcp
+					BOOTPROTO=static
+					#IPADDR=192.168.238.81
+					#PREFIX=24
+				reboot
+				
+				setenforce 0
+				getenforce
+				vi /etc/selinux/config
+					SELINUX=premissive
+				
+				バックアップ作成：
+				
+				login root
+				useradd -G wheel stack
+				passwd stack
+					stack
+				sudoedit /etc/sudoers
+					%wheel All=(ALL)   ALL
+				su - stack
+				sudo yum install -y http://repos.fedorapeople.org/repos/openstack/openstack-icehouse/rdo-release-icehouse-3.noarch.rpm
+				sudo yum update -y
+				sudo reboot
+				
+				login stack
+				sudo yum install -y openstack-packstack-2014.1.1-0.9.dev1055.el6
+					エラー対応
+						sudo yum install -y openstack-packstack-2014.1.1-0.*
+						vi all-in-one.conf
+							CONFIG_CONTROLLER_HOST=192.168.10.81
+							CONFIG_COMPUTE_HOSTS=192.168.10.81
+							CONFIG_NETWORK_HOSTS=192.168.10.81
+							CONFIG_AMQP_BACKEND=rabbitmq
+							CONFIG_SWIFT_STORAGES=192.168.10.81
+				sudo yum install -y git
+				必要があればproxy設定
+					export http_proxy=
+					export https_proxy=
+				git clone https://github.com/h-saito/packstack-answer.git
+				cd packstack-answer
+				git checkout -b 2014.1.1-0.9.dev1055 refs/tags/openstack-packstack-2014.1.1-0.9.dev1055
+				以下のpackstackがエラーになるので、事前に以下を実施
+					sudo yum install -y puppet
+					エラーになることがあったので再試行すると成功した。
+						sqliteがないとか。
+					https://bugzilla.redhat.com/show_bug.cgi?id=1108005
+						openstack-packstack-puppet-2014.1.1-0.24.dev1120.el6ost.noarch
+						openstack-packstack-2014.1.1-0.24.dev1120.el6ost.noarch
+						openstack-puppet-modules-2014.1-14.4.el6ost.noarch
+				packstack --answer-file=all-in-one.conf
+					インストール処理に30分～1時間程度必要
+					インストールメッセージにnagiosadminユーザパスワードを控える。
+				sudo vi /etc/nova/nova.conf
+					virt_type=qemu
+				sudo vi /etc/ceilometer/ceilometer.conf
+					auth_stragegy=keystone
+				sudo vi /etc/sysconfig/network-scripts/ifcfg-eth2
+					DEVICE=eth2
+					BOOTPROTO=static
+					OMBOOT=yes
+					TYPE=OVSPort
+					DEVICETYPE=ovs
+					OVS_BRIDGE=br-ex
+				sudo ovs-vsctl show
+				sudo ovs-vsctl add-port br-ex eth2
+				sudo ovs-vsctl show
+				reboot
+				
+				image add(必要に応じて、デフォルトだとcirrosが登録済み)
+					必要に応じてプロキシ設定
+					export http_proxy=
+					wget https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img
+					name=cirros-0.3-x86_64
+					image=cirros-0.3.0-x86_64-disk.img
+					glance image-create --name=$name --is-public=true --container-format=bare --disk-format=qcow2 < $image
+					nova boot --image cirros-0.3.0-x86_64 --flavor m1.small my-first-server
+            
+	rdo
+		http://openstack.redhat.com/Main_Page
+			
+
+	habana rdo
+		http://www.slideshare.net/VirtualTech-JP/140204-rdo-openstackhavana
+			rpm -q openstack-packstack
+			packstack --gen-answer-file=answer.txt
+			vi answer.txt
+			packstack --answer-file=/root/answer.txt
+			
+			vi /etc/sysctl.conf
+				net.ipv4.ip_forward = 1
+				
+				net.bridge.bridge-nf-call-ip6tables = 0
+				net.bridge.bridge-nf-call-iptables = 0
+				net.bridge.bridge-nf-call-arptables = 0
+				
+				net.ipv4.conf.all.forwarding = 1
+				net.ipv4.conf.all.rp_filter = 0
+				
+				net.ipv4.conf.default.rp_filter = 0
+			
+			vi /etc/sysconfig/network-scripts/ifcfg-br-ex
+				DEVICE=br-ex
+				BOOTPROTO=static
+				OMBOOT=yes
+				TYPE=OVSBridge
+				DEVICETYPE=ovs
+				IPADDR=192.168.0.1
+				NETMASK=255.255.255.0
+				#GATEWAY=192.168.0.254
+				#DNS1=
+				#DNS2=
+

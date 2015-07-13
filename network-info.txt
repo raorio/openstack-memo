@@ -1,6 +1,10 @@
 
 network
 	192.168.10.0/24
+		192.168.10.1/24		gateway and dns (dhcp ip range 200-240)
+		192.168.10.5/24		buffalo air-station 1 (dhcp ip range none)
+		192.168.10.6/24		buffalo air-station 2 (dhcp ip range none)
+	
 		192.168.10.71/24	openstack-1
 			192.168.10.81/24	openstack-i-rdo-1
 			192.168.10.82/24	openstack-i-rdo-2
@@ -14,10 +18,24 @@ network
 			192.168.10.63/24	openstack-i-cell-child-1-2
 			
 			192.168.10.51/24	OSSTest1
+			192.168.10.52/24	ProxyDHCP dnsmasq
+			192.168.10.53/24	DHCP
+			192.168.10.56/24	Docker host 1
+			192.168.10.57/24	Docker host 2
 			
 			192.168.10.41/24	vSphere server
-			192.168.10.42/24	vova-1
+			192.168.10.42/24	
 			192.168.10.43/24	esxi(parent)
 			192.168.10.44/24	esxi-2(nest)
-			192.168.10.45/24	vova-2
+			192.168.10.45/24	vova-20141123
 
+			192.168.10.31/24	openstack-ironic-clc-1(juno rdo)
+			192.168.10.32/24	compute node1
+			192.168.10.33/24	compute node2
+			192.168.10.34/24	
+
+	172.16.2.0/24(VMnet2)
+		172.16.2.x/24		openstack-1
+			172.16.2.51/24		OSSTest1
+			172.16.2.52/24		ProxyDHCP dnsmasq
+			172.16.2.53/24		DHCP
