@@ -1,0 +1,169 @@
+change hostname
+# vi /etc/hostname
+	openstack-l-rdo-3-nn-1
+or
+# hostnamectl set-hostname openstack-l-rdo-3-nn-1
+
+
+ip addr set
+# nmcli d
+	enp0s3	nat
+	enp0s8	bridge
+	enp0s9	host only
+# nmcli c modify enp0s9 ipv4.addresses 192.168.56.54/24
+# #nmcli c modify enp0s9 ipv4.gateway 192.168.56.1
+# #nmcli c modify enp0s9 ipv4.dns 192.168.56.1
+# nmcli c modify enp0s9 ipv4.method manual
+# nmcli c down enp0s9; nmcli c up enp0s9
+# nmcli d show enp0s9
+
+# nmcli c modify enp0s8 ipv4.addresses 192.168.10.54/24
+# nmcli c modify enp0s8 ipv4.gateway 192.168.10.1
+# nmcli c modify enp0s8 ipv4.dns 192.168.10.1
+# nmcli c modify enp0s8 ipv4.method manual
+# nmcli c down enp0s8; nmcli c up enp0s8
+# nmcli d show enp0s8
+
+refer
+	https://github.com/ytooyama/rdo-kilo/blob/master/1-2-RDO-QuickStart-3Node.md
+	https://github.com/ytooyama/rdo-kilo
+
+# systemctl stop NetworkManager
+# systemctl disable NetworkManager
+# systemctl enable network
+
+# vi /usr/lib/sysctl.d/00-system.conf
+	net.ipv4.ip_forward = 1
+	net.ipv4.conf.default.rp_filter = 0
+	net.ipv4.conf.all.rp_filter = 0
+	net.ipv4.conf.all.forwarding = 1
+# sysctl -e -p /usr/lib/sysctl.d/00-system.conf
+
+# vi /etc/hosts
+	127.0.0.1   openstack-l-rdo-3-nn-1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+	192.168.10.54 openstack-l-rdo-3-nn-1
+	192.168.56.53 openstack-l-rdo-3-clc-1
+	192.168.56.54 openstack-l-rdo-3-nn-1
+	192.168.56.55 openstack-l-rdo-3-cn-1
+
+# yum update -y
+
+backup
+	openstack-l-rdo-3-nn-1_set-nic-static
+
+# setenforce 0
+
+コンピュートノードの手順に戻る
+
+NIC設定
+
+packstack実施後のovs現状確認
+# ovs-vsctl show
+	9a7a75fb-7040-4534-b511-5b9388c95702
+	    Bridge br-int
+	        fail_mode: secure
+	        Port br-int
+	            Interface br-int
+	                type: internal
+	        Port patch-tun
+	            Interface patch-tun
+	                type: patch
+	                options: {peer=patch-int}
+	    Bridge br-ex
+	        Port br-ex
+	            Interface br-ex
+	                type: internal
+	    Bridge br-tun
+	        fail_mode: secure
+	        Port "vxlan-c0a83837"
+	            Interface "vxlan-c0a83837"
+	                type: vxlan
+	                options: {df_default="true", in_key=flow, local_ip="192.168.56.54", out_key=flow, remote_ip="192.168.56.55"}
+	        Port br-tun
+	            Interface br-tun
+	                type: internal
+	        Port patch-int
+	            Interface patch-int
+	                type: patch
+	                options: {peer=patch-tun}
+	    ovs_version: "2.4.0"
+
+# vi /etc/sysconfig/network-scripts/ifcfg-enp0s8
+	TYPE=OVSPort
+	DEVICETYPE=ovs
+	OVS_BRIDGE=br-ex
+	NM_CONTROLLED=no
+# vi /etc/sysconfig/network-scripts/ifcfg-br-ex
+	DEVICE=br-ex
+	ONBOOT=yes
+	DEVICETYPE=ovs
+	TYPE=OVSBridge
+	OVSBOOTPROTO=none
+	OVSDHCPINTERFACES=enp0s81
+	IPADDR=192.168.10.54
+	NETMASK=255.255.255.0
+	GATEWAY=192.168.10.1
+	DNS1=192.168.10.1
+	NM_CONTROLLED=no
+
+# reboot
+
+# ovs-vsctl show
+	9a7a75fb-7040-4534-b511-5b9388c95702
+	    Bridge br-int
+	        fail_mode: secure
+	        Port br-int
+	            Interface br-int
+	                type: internal
+	        Port patch-tun
+	            Interface patch-tun
+	                type: patch
+	                options: {peer=patch-int}
+	    Bridge br-ex
+	        Port br-ex
+	            Interface br-ex
+	                type: internal
+	        Port "enp0s8"
+	            Interface "enp0s8"
+	    Bridge br-tun
+	        fail_mode: secure
+	        Port "vxlan-c0a83837"
+	            Interface "vxlan-c0a83837"
+	                type: vxlan
+	                options: {df_default="true", in_key=flow, local_ip="192.168.56.54", out_key=flow, remote_ip="192.168.56.55"}
+	        Port br-tun
+	            Interface br-tun
+	                type: internal
+	        Port patch-int
+	            Interface patch-int
+	                type: patch
+	                options: {peer=patch-tun}
+	    ovs_version: "2.4.0"
+# ip a s br-ex | grep inet
+	    inet 192.168.10.54/24 brd 192.168.10.255 scope global br-ex
+	    inet6 2408:210:a424:8700:a00:27ff:fe76:8f97/64 scope global mngtmpaddr dynamic
+	    inet6 fe80::e874:30ff:fe7e:7f41/64 scope link
+
+# ping www.yahoo.co.jp -c 3 -I br-ex
+	PING www.g.yahoo.co.jp (183.79.135.206) from 192.168.10.54 br-ex: 56(84) bytes of data.
+	From openstack-l-rdo-3-nn-1 (192.168.10.54) icmp_seq=1 Destination Host Unreachable
+	From openstack-l-rdo-3-nn-1 (192.168.10.54) icmp_seq=2 Destination Host Unreachable
+	From openstack-l-rdo-3-nn-1 (192.168.10.54) icmp_seq=3 Destination Host Unreachable
+
+	--- www.g.yahoo.co.jp ping statistics ---
+	3 packets transmitted, 0 received, +3 errors, 100% packet loss, time 1999ms
+	pipe 3
+# ping www.yahoo.co.jp -c 3
+	PING www.yahoo.co.jp (183.79.135.206) 56(84) bytes of data.
+	64 bytes from f1.top.vip.kks.yahoo.co.jp (183.79.135.206): icmp_seq=1 ttl=48 time=27.7 ms
+	64 bytes from f1.top.vip.kks.yahoo.co.jp (183.79.135.206): icmp_seq=2 ttl=48 time=30.8 ms
+	64 bytes from f1.top.vip.kks.yahoo.co.jp (183.79.135.206): icmp_seq=3 ttl=48 time=27.7 ms
+
+	--- www.yahoo.co.jp ping statistics ---
+	3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+	rtt min/avg/max/mdev = 27.720/28.787/30.856/1.469 ms
+
+	br-ex経由だと通信できない。NATのnic enp0s3のせい？
+
+コンピュートノードの手順に戻る
+

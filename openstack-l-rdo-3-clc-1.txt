@@ -1,0 +1,408 @@
+change hostname
+# vi /etc/hostname
+	openstack-l-rdo-3-clc-1
+or
+# hostnamectl set-hostname openstack-l-rdo-3-clc-1
+
+
+ip addr set
+# nmcli d
+	enp0s3	nat
+	enp0s8	bridge
+	enp0s9	host only
+# nmcli c modify enp0s9 ipv4.addresses 192.168.56.53/24
+# #nmcli c modify enp0s9 ipv4.gateway 192.168.56.1
+# #nmcli c modify enp0s9 ipv4.dns 192.168.56.1
+# nmcli c modify enp0s9 ipv4.method manual
+# nmcli c down enp0s9; nmcli c up enp0s9
+# nmcli d show enp0s9
+
+# nmcli c modify enp0s8 ipv4.addresses 192.168.10.53/24
+# nmcli c modify enp0s8 ipv4.gateway 192.168.10.1
+# nmcli c modify enp0s8 ipv4.dns 192.168.10.1
+# nmcli c modify enp0s8 ipv4.method manual
+# nmcli c down enp0s8; nmcli c up enp0s8
+# nmcli d show enp0s8
+
+refer
+	https://github.com/ytooyama/rdo-kilo/blob/master/1-2-RDO-QuickStart-3Node.md
+	https://github.com/ytooyama/rdo-kilo
+
+# systemctl stop NetworkManager
+# systemctl disable NetworkManager
+# systemctl enable network
+
+# vi /usr/lib/sysctl.d/00-system.conf
+	net.ipv4.ip_forward = 1
+	net.ipv4.conf.default.rp_filter = 0
+	net.ipv4.conf.all.rp_filter = 0
+	net.ipv4.conf.all.forwarding = 1
+# sysctl -e -p /usr/lib/sysctl.d/00-system.conf
+
+# vi /etc/hosts
+	127.0.0.1   openstack-l-rdo-3-clc-1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+	192.168.10.53 openstack-l-rdo-3-clc-1
+	192.168.56.53 openstack-l-rdo-3-clc-1
+	192.168.56.54 openstack-l-rdo-3-nn-1
+	192.168.56.55 openstack-l-rdo-3-cn-1
+
+# yum update -y
+
+backup
+	openstack-l-rdo-3-clc-1_set-nic-static
+	
+refer
+	https://www.rdoproject.org/install/quickstart/
+
+# yum install -y https://www.rdoproject.org/repos/rdo-release.rpm
+# yum install -y openstack-packstack
+
+# setenforce 0
+
+ネットワークノードとコンピュートノードの設定を実施
+	openstack-l-rdo-3-nn-1
+	openstack-l-rdo-3-cn-1
+
+# packstack --dry-run --allinone --default-password=password --provision-demo=n
+	参考
+		# packstack --allinone
+# vi packstack-answers-20150612-162316.txt
+	CONFIG_NETWORK_HOSTS=192.168.56.54
+	CONFIG_COMPUTE_HOSTS=192.168.56.55
+	CONFIG_NEUTRON_OVS_TUNNEL_IF=enp0s9
+# packstack --answer-file=packstack-answers-20150612-162316.txt
+
+http://192.168.56.53/dashboard
+
+ネットワークノードのNIC設定を実施
+	openstack-l-rdo-3-nn-1
+
+# source /root/keystonerc_admin
+# nova-manage service list
+	No handlers could be found for logger "oslo_config.cfg"
+	2016-02-10 09:49:07.227 22094 WARNING oslo_config.cfg [req-d00414ea-e29c-4c91-b2a5-24efe5b65823 - - - - -] Option "sql_connection" from group "DEFAULT" is deprecated. Use option "connection" from group "database".
+	Binary           Host                                 Zone             Status     State Updated_At
+	nova-consoleauth openstack-l-rdo-3-clc-1              internal         enabled    :-)   2016-02-10 00:49:02
+	nova-scheduler   openstack-l-rdo-3-clc-1              internal         enabled    :-)   2016-02-10 00:49:03
+	nova-conductor   openstack-l-rdo-3-clc-1              internal         enabled    :-)   2016-02-10 00:49:05
+	nova-cert        openstack-l-rdo-3-clc-1              internal         enabled    :-)   2016-02-10 00:49:05
+	nova-compute     openstack-l-rdo-3-cn-1               nova             enabled    :-)   2016-02-10 00:49:02
+# neutron agent-list -c agent_type -c host -c alive
+	+--------------------+------------------------+-------+
+	| agent_type         | host                   | alive |
+	+--------------------+------------------------+-------+
+	| L3 agent           | openstack-l-rdo-3-nn-1 | :-)   |
+	| Metadata agent     | openstack-l-rdo-3-nn-1 | :-)   |
+	| Open vSwitch agent | openstack-l-rdo-3-nn-1 | :-)   |
+	| DHCP agent         | openstack-l-rdo-3-nn-1 | :-)   |
+	| Open vSwitch agent | openstack-l-rdo-3-cn-1 | :-)   |
+	+--------------------+------------------------+-------+
+
+
+ネットワーク作成
+
+# source keystonerc_admin
+# neutron router-create router1
+	Created a new router:
+	+-----------------------+--------------------------------------+
+	| Field                 | Value                                |
+	+-----------------------+--------------------------------------+
+	| admin_state_up        | True                                 |
+	| distributed           | False                                |
+	| external_gateway_info |                                      |
+	| ha                    | False                                |
+	| id                    | c6cb6d6b-244d-4117-b20e-47e924cc1afa |
+	| name                  | router1                              |
+	| routes                |                                      |
+	| status                | ACTIVE                               |
+	| tenant_id             | 7ccde4458e83492b850102ad50245e1d     |
+	+-----------------------+--------------------------------------+
+# openstack project list
+	+----------------------------------+----------+
+	| ID                               | Name     |
+	+----------------------------------+----------+
+	| 7ccde4458e83492b850102ad50245e1d | admin    |
+	| 5a809eda2bfa4e509a3d1836bf0671be | services |
+	+----------------------------------+----------+
+# neutron net-create public --router:external --tenant-id 7ccde4458e83492b850102ad50245e1d
+	Created a new network:
+	+---------------------------+--------------------------------------+
+	| Field                     | Value                                |
+	+---------------------------+--------------------------------------+
+	| admin_state_up            | True                                 |
+	| id                        | 4075a9d0-7417-4073-9350-6acb4a7ca0e1 |
+	| mtu                       | 0                                    |
+	| name                      | public                               |
+	| provider:network_type     | vxlan                                |
+	| provider:physical_network |                                      |
+	| provider:segmentation_id  | 53                                   |
+	| router:external           | True                                 |
+	| shared                    | False                                |
+	| status                    | ACTIVE                               |
+	| subnets                   |                                      |
+	| tenant_id                 | 7ccde4458e83492b850102ad50245e1d     |
+	+---------------------------+--------------------------------------+
+# neutron net-create demo-net --shared --tenant-id 5a809eda2bfa4e509a3d1836bf0671be
+	Created a new network:
+	+---------------------------+--------------------------------------+
+	| Field                     | Value                                |
+	+---------------------------+--------------------------------------+
+	| admin_state_up            | True                                 |
+	| id                        | ef0527e6-63d6-47c9-887c-445f62c9336f |
+	| mtu                       | 0                                    |
+	| name                      | demo-net                             |
+	| provider:network_type     | vxlan                                |
+	| provider:physical_network |                                      |
+	| provider:segmentation_id  | 74                                   |
+	| router:external           | False                                |
+	| shared                    | True                                 |
+	| status                    | ACTIVE                               |
+	| subnets                   |                                      |
+	| tenant_id                 | 5a809eda2bfa4e509a3d1836bf0671be     |
+	+---------------------------+--------------------------------------+
+# neutron subnet-create --name public_subnet --enable_dhcp=False --allocation-pool=start=192.168.10.60,end=192.168.10.69 --gateway=192.168.10.1 public 192.168.10.0/24
+	Created a new subnet:
+	+-------------------+----------------------------------------------------+
+	| Field             | Value                                              |
+	+-------------------+----------------------------------------------------+
+	| allocation_pools  | {"start": "192.168.10.60", "end": "192.168.10.69"} |
+	| cidr              | 192.168.10.0/24                                    |
+	| dns_nameservers   |                                                    |
+	| enable_dhcp       | False                                              |
+	| gateway_ip        | 192.168.10.1                                       |
+	| host_routes       |                                                    |
+	| id                | db804c46-b4a9-4d53-9521-cb6c702e5718               |
+	| ip_version        | 4                                                  |
+	| ipv6_address_mode |                                                    |
+	| ipv6_ra_mode      |                                                    |
+	| name              | public_subnet                                      |
+	| network_id        | 4075a9d0-7417-4073-9350-6acb4a7ca0e1               |
+	| subnetpool_id     |                                                    |
+	| tenant_id         | 7ccde4458e83492b850102ad50245e1d                   |
+	+-------------------+----------------------------------------------------+
+# neutron subnet-create --name demo-net_subnet --enable_dhcp=True --allocation-pool=start=192.168.2.100,end=192.168.2.254 --gateway=192.168.2.1 --dns-nameserver 192.168.10.1 demo-net 192.168.2.0/24
+	Created a new subnet:
+	+-------------------+----------------------------------------------------+
+	| Field             | Value                                              |
+	+-------------------+----------------------------------------------------+
+	| allocation_pools  | {"start": "192.168.2.100", "end": "192.168.2.254"} |
+	| cidr              | 192.168.2.0/24                                     |
+	| dns_nameservers   | 192.168.10.1                                       |
+	| enable_dhcp       | True                                               |
+	| gateway_ip        | 192.168.2.1                                        |
+	| host_routes       |                                                    |
+	| id                | 5afedd8f-5899-4c4d-a8b5-fe935dbae739               |
+	| ip_version        | 4                                                  |
+	| ipv6_address_mode |                                                    |
+	| ipv6_ra_mode      |                                                    |
+	| name              | demo-net_subnet                                    |
+	| network_id        | ef0527e6-63d6-47c9-887c-445f62c9336f               |
+	| subnetpool_id     |                                                    |
+	| tenant_id         | 7ccde4458e83492b850102ad50245e1d                   |
+	+-------------------+----------------------------------------------------+
+ネットワークノードでovs-vsctl showした結果
+	# ovs-vsctl show
+		9a7a75fb-7040-4534-b511-5b9388c95702
+		    Bridge br-int
+		        fail_mode: secure
+		        Port "tap5be071b5-4a"
+		            tag: 1
+		            Interface "tap5be071b5-4a"
+		                type: internal
+		        Port br-int
+		            Interface br-int
+		                type: internal
+		        Port patch-tun
+		            Interface patch-tun
+		                type: patch
+		                options: {peer=patch-int}
+		    Bridge br-ex
+		        Port br-ex
+		            Interface br-ex
+		                type: internal
+		        Port "enp0s8"
+		            Interface "enp0s8"
+		    Bridge br-tun
+		        fail_mode: secure
+		        Port "vxlan-c0a83837"
+		            Interface "vxlan-c0a83837"
+		                type: vxlan
+		                options: {df_default="true", in_key=flow, local_ip="192.168.56.54", out_key=flow, remote_ip="192.168.56.55"}
+		        Port br-tun
+		            Interface br-tun
+		                type: internal
+		        Port patch-int
+		            Interface patch-int
+		                type: patch
+		                options: {peer=patch-tun}
+		    ovs_version: "2.4.0"
+	「br-int」ブリッジに「tap5be071b5-4a」が追加されている。
+# neutron router-gateway-set router1 public
+	Set gateway for router router1
+ネットワークノードでovs-vsctl showした結果
+	# ovs-vsctl show
+		9a7a75fb-7040-4534-b511-5b9388c95702
+		    Bridge br-int
+		        fail_mode: secure
+		        Port "tap5be071b5-4a"
+		            tag: 1
+		            Interface "tap5be071b5-4a"
+		                type: internal
+		        Port br-int
+		            Interface br-int
+		                type: internal
+		        Port patch-tun
+		            Interface patch-tun
+		                type: patch
+		                options: {peer=patch-int}
+		    Bridge br-ex
+		        Port br-ex
+		            Interface br-ex
+		                type: internal
+		        Port "enp0s8"
+		            Interface "enp0s8"
+		        Port "qg-bc706106-84"
+		            Interface "qg-bc706106-84"
+		                type: internal
+		    Bridge br-tun
+		        fail_mode: secure
+		        Port "vxlan-c0a83837"
+		            Interface "vxlan-c0a83837"
+		                type: vxlan
+		                options: {df_default="true", in_key=flow, local_ip="192.168.56.54", out_key=flow, remote_ip="192.168.56.55"}
+		        Port br-tun
+		            Interface br-tun
+		                type: internal
+		        Port patch-int
+		            Interface patch-int
+		                type: patch
+		                options: {peer=patch-tun}
+		    ovs_version: "2.4.0"
+	「br-ex」ブリッジに「qg-bc706106-84」が追加されている。
+# neutron router-interface-add router1 subnet=demo-net_subnet
+	Added interface 32f6089b-5d35-40bb-86b0-30044b5e05bb to router router1.
+ネットワークノードでovs-vsctl showした結果
+	# ovs-vsctl show
+		9a7a75fb-7040-4534-b511-5b9388c95702
+		    Bridge br-int
+		        fail_mode: secure
+		        Port "tap5be071b5-4a"
+		            tag: 1
+		            Interface "tap5be071b5-4a"
+		                type: internal
+		        Port "qr-32f6089b-5d"
+		            tag: 1
+		            Interface "qr-32f6089b-5d"
+		                type: internal
+		        Port br-int
+		            Interface br-int
+		                type: internal
+		        Port patch-tun
+		            Interface patch-tun
+		                type: patch
+		                options: {peer=patch-int}
+		    Bridge br-ex
+		        Port br-ex
+		            Interface br-ex
+		                type: internal
+		        Port "enp0s8"
+		            Interface "enp0s8"
+		        Port "qg-bc706106-84"
+		            Interface "qg-bc706106-84"
+		                type: internal
+		    Bridge br-tun
+		        fail_mode: secure
+		        Port "vxlan-c0a83837"
+		            Interface "vxlan-c0a83837"
+		                type: vxlan
+		                options: {df_default="true", in_key=flow, local_ip="192.168.56.54", out_key=flow, remote_ip="192.168.56.55"}
+		        Port br-tun
+		            Interface br-tun
+		                type: internal
+		        Port patch-int
+		            Interface patch-int
+		                type: patch
+		                options: {peer=patch-tun}
+		    ovs_version: "2.4.0"
+	「br-int」ブリッジに「qr-32f6089b-5d」が追加されている。
+ネットワークノードで以下コマンド実行と確認
+	# ip netns
+		qrouter-c6cb6d6b-244d-4117-b20e-47e924cc1afa
+		qdhcp-ef0527e6-63d6-47c9-887c-445f62c9336f
+	# ip netns exec `ip netns|grep qrouter` ip r
+		default via 192.168.10.1 dev qg-bc706106-84
+		192.168.2.0/24 dev qr-32f6089b-5d  proto kernel  scope link  src 192.168.2.1
+		192.168.10.0/24 dev qg-bc706106-84  proto kernel  scope link  src 192.168.10.60
+	# ip netns exec `ip netns|grep qrouter` ping -c 3 -I qg-bc706106-84 192.168.10.60
+		PING 192.168.10.60 (192.168.10.60) from 192.168.10.60 qg-bc706106-84: 56(84) bytes of data.
+		64 bytes from 192.168.10.60: icmp_seq=1 ttl=64 time=0.032 ms
+		64 bytes from 192.168.10.60: icmp_seq=2 ttl=64 time=0.066 ms
+		64 bytes from 192.168.10.60: icmp_seq=3 ttl=64 time=0.026 ms
+
+		--- 192.168.10.60 ping statistics ---
+		3 packets transmitted, 3 received, 0% packet loss, time 1998ms
+		rtt min/avg/max/mdev = 0.026/0.041/0.066/0.018 ms
+	# ip netns exec `ip netns|grep qrouter` ping -c 3 -I qg-bc706106-84 192.168.10.1
+		PING 192.168.10.1 (192.168.10.1) from 192.168.10.60 qg-bc706106-84: 56(84) bytes of data.
+		64 bytes from 192.168.10.1: icmp_seq=1 ttl=64 time=4.76 ms
+		64 bytes from 192.168.10.1: icmp_seq=2 ttl=64 time=1.96 ms
+		64 bytes from 192.168.10.1: icmp_seq=3 ttl=64 time=2.51 ms
+
+		--- 192.168.10.1 ping statistics ---
+		3 packets transmitted, 3 received, 0% packet loss, time 2005ms
+		rtt min/avg/max/mdev = 1.961/3.080/4.764/1.212 ms
+	# ip netns exec `ip netns|grep qrouter` ping -c 3 -I qr-32f6089b-5d 192.168.2.1
+		PING 192.168.2.1 (192.168.2.1) from 192.168.2.1 qr-32f6089b-5d: 56(84) bytes of data.
+		64 bytes from 192.168.2.1: icmp_seq=1 ttl=64 time=0.031 ms
+		64 bytes from 192.168.2.1: icmp_seq=2 ttl=64 time=0.049 ms
+		64 bytes from 192.168.2.1: icmp_seq=3 ttl=64 time=0.051 ms
+
+		--- 192.168.2.1 ping statistics ---
+		3 packets transmitted, 3 received, 0% packet loss, time 2001ms
+		rtt min/avg/max/mdev = 0.031/0.043/0.051/0.011 ms
+
+refer
+	http://docwiki.cisco.com/w/index.php?title=OpenStack:_Storing_Images_In_Glance&oldid=56483
+
+# wget http://download.cirros-cloud.net/0.3.1/cirros-0.3.1-x86_64-disk.img
+# glance image-create --name cirros-x86_64 --disk-format qcow2 --container-format ovf --file cirros-0.3.1-x86_64-disk.img --progress
+	[=============================>] 100%
+	+------------------+--------------------------------------+
+	| Property         | Value                                |
+	+------------------+--------------------------------------+
+	| checksum         | d972013792949d0d3ba628fbe8685bce     |
+	| container_format | ovf                                  |
+	| created_at       | 2016-02-10T01:14:36Z                 |
+	| disk_format      | qcow2                                |
+	| id               | e66b2c10-2d7d-447b-9710-a2e6821d0f89 |
+	| min_disk         | 0                                    |
+	| min_ram          | 0                                    |
+	| name             | cirros-x86_64                        |
+	| owner            | 7ccde4458e83492b850102ad50245e1d     |
+	| protected        | False                                |
+	| size             | 13147648                             |
+	| status           | active                               |
+	| tags             | []                                   |
+	| updated_at       | 2016-02-10T01:14:36Z                 |
+	| virtual_size     | None                                 |
+	| visibility       | private                              |
+	+------------------+--------------------------------------+
+
+	「--is-public True」をつけるとエラーとなるので外した。別の方法で設定するのかと。
+
+guiからvncアクセスができない問題やキーマップの対処
+
+コンピュートノードで以下を実行
+	# vi /etc/nova/nova.conf
+		#vncserver_proxyclient_address=openstack-l-rdo-3-cn-1.flets-east.jp
+		vncserver_proxyclient_address=openstack-l-rdo-3-cn-1
+		#vnc_keymap=en-us
+		vnc_keymap=ja
+	# systemctl restart openstack-nova-compute
+
+web gui等から以下操作
+１．セキュリティグループ作成
+２．インスタンス作成
+３．フローティングIP確保と割り当て
+４．外部からインスタンスへのアクセス
+
