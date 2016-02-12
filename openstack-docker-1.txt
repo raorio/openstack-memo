@@ -1,0 +1,333 @@
+openstack
+	magnum
+		kubernetes + docker swarm + mesos
+
+refer
+	http://knowledge.sakura.ad.jp/tech/3681/
+		kubernetes + dockerに関する記事
+		2015年11月23日
+
+	https://thinkit.co.jp/story/2015/10/28/6553
+		OpenStack Magnumの記事
+			devstackでmagnumを構築
+		2015年10月28日(水)
+
+	http://ameblo.jp/principia-ca/entry-12071866495.html
+		OpenStack Magnumの構築の記事
+		2015年12月10日(木)
+
+	http://docs.openstack.org/developer/magnum/dev/dev-quickstart.html
+		devstackのページ
+
+
+================================================================================
+$ sudo vi /etc/network/interfaces
+	auto lo
+	iface lo inet loopback
+
+	auto eth0
+	iface eth0 inet dhcp
+
+	auto eth1
+	iface eth1 inet static
+	address 192.168.10.57
+	network 192.168.10.0
+	netmask 255.255.255.0
+	broadcast 192.168.10.255
+	gateway 192.168.10.1
+	dns-nameservers 192.168.10.1
+
+	auto eth2
+	iface eth2 inet static
+	address 192.168.56.57
+	network 192.168.56.0
+	netmask 255.255.255.0
+	broadcast 192.168.56.255
+
+$ sudo service networking restart
+$ sudo reboot
+
+$ sudo apt-get update
+$ sudo apt-get install -y python-dev libssl-dev libxml2-dev libmysqlclient-dev libxslt-dev libpq-dev git libffi-dev gettext build-essential
+
+
+$ sudo mkdir -p /opt/stack
+$ sudo chown $USER /opt/stack
+$ git clone https://git.openstack.org/openstack-dev/devstack /opt/stack/devstack
+
+$ cat > /opt/stack/devstack/local.conf << END
+	[[local|localrc]]
+	DATABASE_PASSWORD=password
+	RABBIT_PASSWORD=password
+	SERVICE_TOKEN=password
+	SERVICE_PASSWORD=password
+	ADMIN_PASSWORD=password
+	PUBLIC_INTERFACE=eth1 
+	enable_plugin magnum https://git.openstack.org/openstack/magnum
+	VOLUME_BACKING_FILE_SIZE=20G
+	FLOATING_RANGE=192.168.10.0/24
+	END 
+    
+    その他
+    	http://docs.openstack.org/developer/devstack/guides/neutron.html
+
+backup
+	openstack-magnum-2_set-nic-static
+
+$ cd /opt/stack/devstack
+$ ./stack.sh
+	30分程度かかるそうだが、数時間かかり中
+
+$ source /opt/stack/devstack/openrc admin admin
+$ glance image-list
+	+--------------------------------------+---------------------------------+
+	| ID                                   | Name                            |
+	+--------------------------------------+---------------------------------+
+	| 31cae9a4-a240-4060-afb6-16470a793a45 | cirros-0.3.4-x86_64-uec         |
+	| 1e406658-a395-44a1-8db2-b55bf3b7d171 | cirros-0.3.4-x86_64-uec-kernel  |
+	| 2b76bed9-ead0-4845-96f6-fdab9aa71bd2 | cirros-0.3.4-x86_64-uec-ramdisk |
+	| b53a6a87-4a5f-4c92-a3a8-6fcef9b22883 | fedora-21-atomic-5              |
+	+--------------------------------------+---------------------------------+
+
+http://192.168.10.57/dashboard
+
+	devstackで使われているscreenの基本
+		screen -x stack
+			24$(L) h-api-cfn  25$(L) h-api-cw  26$(L) horizon  27$(L) m-api   28$(L) m-cond
+		$ ./unstack.sh
+		以下の実行で再実行可能
+			$./unstack.sh
+			$ sudo reboot
+			$ vi /opt/stack/devstack/local.conf
+				OFFLINE=True
+			$ cd /opt/stack/devstack
+			$ ./stack.sh
+		以下ではうまく起動できなかった。
+			$ sudo reboot
+			$ cd /opt/stack/devstack
+			$ ./rejoin-stask.sh
+		http://dotnsf.blog.jp/archives/1003331169.html
+
+$ test -f ~/.ssh/id_rsa.pub || ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
+$ nova keypair-add --pub-key ~/.ssh/id_rsa.pub testkey
+$ nova keypair-list
+	+---------+------+-------------------------------------------------+
+	| Name    | Type | Fingerprint                                     |
+	+---------+------+-------------------------------------------------+
+	| testkey | ssh  | 4d:97:ca:0f:24:2c:f8:b8:d9:33:82:9b:59:d0:b7:7f |
+	+---------+------+-------------------------------------------------+
+
+$ magnum baymodel-create --name k8sbaymodel --image-id fedora-21-atomic-5 --keypair-id testkey --external-network-id public --dns-nameserver 192.168.10.1 --flavor-id m1.small --docker-volume-size 5 --network-driver flannel --coe kubernetes
+	+---------------------+--------------------------------------+
+	| Property            | Value                                |
+	+---------------------+--------------------------------------+
+	| http_proxy          | None                                 |
+	| updated_at          | None                                 |
+	| master_flavor_id    | None                                 |
+	| ssh_authorized_key  | None                                 |
+	| uuid                | 26d38f94-aeef-45bc-ad5e-af4c4759a887 |
+	| no_proxy            | None                                 |
+	| https_proxy         | None                                 |
+	| tls_disabled        | False                                |
+	| keypair_id          | testkey                              |
+	| public              | False                                |
+	| labels              | {}                                   |
+	| docker_volume_size  | 5                                    |
+	| server_type         | vm                                   |
+	| external_network_id | public                               |
+	| cluster_distro      | fedora-atomic                        |
+	| image_id            | fedora-21-atomic-5                   |
+	| volume_driver       | None                                 |
+	| registry_enabled    | False                                |
+	| apiserver_port      | None                                 |
+	| name                | k8sbaymodel                          |
+	| created_at          | 2016-02-12T10:15:29+00:00            |
+	| network_driver      | flannel                              |
+	| fixed_network       | None                                 |
+	| coe                 | kubernetes                           |
+	| flavor_id           | m1.small                             |
+	| dns_nameserver      | 192.168.10.1                         |
+	+---------------------+--------------------------------------+
+
+$ magnum bay-create --name k8sbay --baymodel k8sbaymodel --node-count 1
+	+--------------------+------------------------------------------------------------+
+	| Property           | Value                                                      |
+	+--------------------+------------------------------------------------------------+
+	| status             | None                                                       |
+	| uuid               | 3ee135fc-9977-437b-addf-b3d9872074d8                       |
+	| stack_id           | 06d8ad5b-6dc3-4ea8-af95-3ac4544cf151                       |
+	| status_reason      | None                                                       |
+	| created_at         | 2016-02-12T10:16:25+00:00                                  |
+	| updated_at         | None                                                       |
+	| bay_create_timeout | 0                                                          |
+	| api_address        | None                                                       |
+	| baymodel_id        | 26d38f94-aeef-45bc-ad5e-af4c4759a887                       |
+	| master_addresses   | None                                                       |
+	| node_count         | 1                                                          |
+	| node_addresses     | None                                                       |
+	| master_count       | 1                                                          |
+	| discovery_url      | https://discovery.etcd.io/b446aa9f98940dd9480ea81b38aa22cf |
+	| name               | k8sbay                                                     |
+	+--------------------+------------------------------------------------------------+
+
+$ watch -n 5 magnum bay-list
+	+--------------------------------------+--------+------------+--------------+--------------------+
+	| uuid                                 | name   | node_count | master_count | status             |
+	+--------------------------------------+--------+------------+--------------+--------------------+
+	| 3ee135fc-9977-437b-addf-b3d9872074d8 | k8sbay | 1          | 1            | CREATE_IN_PROGRESS |
+	+--------------------------------------+--------+------------+--------------+--------------------+
+	↓
+	+--------------------------------------+--------+------------+--------------+-----------------+
+	| uuid                                 | name   | node_count | master_count | status          |
+	+--------------------------------------+--------+------------+--------------+-----------------+
+	| 3ee135fc-9977-437b-addf-b3d9872074d8 | k8sbay | 1          | 1            | CREATE_COMPLETE |
+	+--------------------------------------+--------+------------+--------------+-----------------+
+
+$ magnum bay-update k8sbay replace node_count=2
+	+--------------------+------------------------------------------------------------+
+	| Property           | Value                                                      |
+	+--------------------+------------------------------------------------------------+
+	| status             | CREATE_COMPLETE                                            |
+	| uuid               | 3ee135fc-9977-437b-addf-b3d9872074d8                       |
+	| stack_id           | 06d8ad5b-6dc3-4ea8-af95-3ac4544cf151                       |
+	| status_reason      | Stack CREATE completed successfully                        |
+	| created_at         | 2016-02-12T10:16:25+00:00                                  |
+	| updated_at         | 2016-02-12T10:27:50+00:00                                  |
+	| bay_create_timeout | 0                                                          |
+	| api_address        | https://172.24.4.4:6443                                    |
+	| baymodel_id        | 26d38f94-aeef-45bc-ad5e-af4c4759a887                       |
+	| master_addresses   | ['172.24.4.5']                                             |
+	| node_count         | 2                                                          |
+	| node_addresses     | ['172.24.4.6']                                             |
+	| master_count       | 1                                                          |
+	| discovery_url      | https://discovery.etcd.io/b446aa9f98940dd9480ea81b38aa22cf |
+	| name               | k8sbay                                                     |
+	+--------------------+------------------------------------------------------------+
+
+$ watch -n 5 magnum bay-list
+	+--------------------------------------+--------+------------+--------------+--------------------+
+	| uuid                                 | name   | node_count | master_count | status             |
+	+--------------------------------------+--------+------------+--------------+--------------------+
+	| 3ee135fc-9977-437b-addf-b3d9872074d8 | k8sbay | 1          | 1            | UPDATE_IN_PROGRESS |
+	+--------------------------------------+--------+------------+--------------+--------------------+
+	↓
+	+--------------------------------------+--------+------------+--------------+-----------------+
+	| uuid                                 | name   | node_count | master_count | status          |
+	+--------------------------------------+--------+------------+--------------+-----------------+
+	| 3ee135fc-9977-437b-addf-b3d9872074d8 | k8sbay | 2          | 1            | UPDATE_COMPLETE |
+	+--------------------------------------+--------+------------+--------------+-----------------+
+
+$ cd
+	以下古い内容
+		$ wget https://github.com/kubernetes/kubernetes/releases/download/v1.0.1/kubernetes.tar.gz
+		$ tar -xvzf kubernetes.tar.gz
+$ wget https://github.com/kubernetes/kubernetes/releases/download/v1.1.0-alpha.1/kubernetes.tar.gz
+$ tar -xvzf kubernetes.tar.gz
+
+$ cd kubernetes/examples/spark
+$ magnum pod-create --manifest ./spark-master.json --bay k8sbay
+	以下の500エラーとなった。高負荷に耐えれていない？
+		ERROR: Timed out waiting for a reply to message ID 645f3629ef48425ca67b49c18275eb07 (HTTP 500)
+
+$ magnum coe-service-create --manifest ./spark-master-service.json --bay k8sbay
+
+$ sed -i 's/(\"replicas\": )3/2/' spark-worker-controller.json
+$ magnum rc-create --manifest ./spark-worker-controller.json --bay k8sbay
+
+$ magnum bay-show k8sbay
+
+$ ssh minion@172.24.4.6
+	$ sudo docker ps
+$ ssh minion@172.24.4.7
+	$ sudo docker ps
+	$ sudo docker exec -it 2dc1adbe3855 bash
+		# root@spark-driver:/# pyspark
+			>>> import socket
+			>>> sc.parallelize(range(1000)).map(lambda x:socket.gethostname()).distinct().collect() 
+
+$ ssh -i ~/.ssh/id_rsa root@172.24.4.5
+
+
+================================================================================
+centos7で試して、devstack.shがうまくいかなかった。
+
+change hostname
+# vi /etc/hostname
+or
+# hostnamectl set-hostname openstack-magnum-1
+
+
+ip addr set
+# nmcli d
+	enp0s3	nat
+	enp0s8	bridge
+	enp0s9	host only
+# nmcli c modify enp0s9 ipv4.addresses 192.168.56.56/24
+# #nmcli c modify enp0s9 ipv4.gateway 192.168.56.1
+# #nmcli c modify enp0s9 ipv4.dns 192.168.56.1
+# nmcli c modify enp0s9 ipv4.method manual
+# nmcli c down enp0s9; nmcli c up enp0s9
+# nmcli d show enp0s9
+
+# nmcli c modify enp0s8 ipv4.addresses 192.168.10.56/24
+# nmcli c modify enp0s8 ipv4.gateway 192.168.10.1
+# nmcli c modify enp0s8 ipv4.dns 192.168.10.1
+# nmcli c modify enp0s8 ipv4.method manual
+# nmcli c down enp0s8; nmcli c up enp0s8
+# nmcli d show enp0s8
+
+# yum update -y
+
+# systemctl stop NetworkManager
+# systemctl disable NetworkManager
+# systemctl enable network
+
+# vi /usr/lib/sysctl.d/00-system.conf
+	net.ipv4.ip_forward = 1
+	net.ipv4.conf.default.rp_filter = 0
+	net.ipv4.conf.all.rp_filter = 0
+	net.ipv4.conf.all.forwarding = 1
+# sysctl -e -p /usr/lib/sysctl.d/00-system.conf
+
+# vi /etc/hosts
+	127.0.0.1   openstack-magnum-1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+	192.168.56.6 openstack-magnum-1
+	192.168.10.56 openstack-magnum-1
+
+# yum install -y python-dev libssl-dev libxml2-dev libmysqlclient-dev libxslt-dev libpq-dev git libffi-dev gettext build-essential
+# mkdir -p /opt/stack
+# useradd stack
+# passwd stack
+# chown stack:stack /opt/stack -R
+# su - stack
+$ git clone https://git.openstack.org/openstack-dev/devstack /opt/stack/devstack
+$ cat > /opt/stack/devstack/local.conf << END
+    DATABASE_PASSWORD=password
+    RABBIT_PASSWORD=password
+    SERVICE_TOKEN=password
+    SERVICE_PASSWORD=password
+    ADMIN_PASSWORD=password
+    PUBLIC_INTERFACE=enp0s8 
+    enable_plugin magnum https://git.openstack.org/openstack/magnum
+    VOLUME_BACKING_FILE_SIZE=20G 
+    END 
+$ cd /opt/stack/devstack
+
+backup
+	openstack-magnum-1_set-nic-static
+
+# setenforce 0
+
+$ ./stack.sh
+	30分程度かかるそう
+	
+	エラーとなった。
+		以下試したが解決しなかった。
+			http://tzpst.hatenablog.com/entry/2015/05/31/225003
+			# yum groupinstall -y "Development Tools" 
+			# yum install -y "net-tools" "iptables-services" "vmware-tools"
+
+$ source /opt/stack/devstack/openrc admin admin
+$ glance image-list
+
+================================================================================
