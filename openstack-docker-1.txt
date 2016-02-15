@@ -19,6 +19,9 @@ refer
 	http://docs.openstack.org/developer/magnum/dev/dev-quickstart.html
 		devstackのページ
 
+	http://docs.openstack.org/developer/devstack/guides/devstack-with-nested-kvm.html
+		devstack kvm nested
+
 
 ================================================================================
 $ sudo vi /etc/network/interfaces
@@ -66,6 +69,7 @@ $ cat > /opt/stack/devstack/local.conf << END
 	enable_plugin magnum https://git.openstack.org/openstack/magnum
 	VOLUME_BACKING_FILE_SIZE=20G
 	FLOATING_RANGE=192.168.10.0/24
+	LIBVIRT_TYPE=kvm
 	END 
     
     その他
@@ -96,7 +100,7 @@ http://192.168.10.57/dashboard
 			24$(L) h-api-cfn  25$(L) h-api-cw  26$(L) horizon  27$(L) m-api   28$(L) m-cond
 		$ ./unstack.sh
 		以下の実行で再実行可能
-			$./unstack.sh
+			$ ./unstack.sh
 			$ sudo reboot
 			$ vi /opt/stack/devstack/local.conf
 				OFFLINE=True
@@ -228,6 +232,8 @@ $ cd kubernetes/examples/spark
 $ magnum pod-create --manifest ./spark-master.json --bay k8sbay
 	以下の500エラーとなった。高負荷に耐えれていない？
 		ERROR: Timed out waiting for a reply to message ID 645f3629ef48425ca67b49c18275eb07 (HTTP 500)
+	k8s(kubernetes)だとバグで動作しない。swarmなら動作する？
+		https://bugs.launchpad.net/magnum/+bug/1469748
 
 $ magnum coe-service-create --manifest ./spark-master-service.json --bay k8sbay
 
@@ -246,6 +252,193 @@ $ ssh minion@172.24.4.7
 			>>> sc.parallelize(range(1000)).map(lambda x:socket.gethostname()).distinct().collect() 
 
 $ ssh -i ~/.ssh/id_rsa root@172.24.4.5
+
+----------------------------------------
+$ magnum baymodel-create --name swarmbaymodel --image-id fedora-21-atomic-5 --keypair-id testkey --external-network-id public --dns-nameserver 192.168.10.1 --flavor-id m1.small --docker-volume-size 5 --coe swarm
+	+---------------------+--------------------------------------+
+	| Property            | Value                                |
+	+---------------------+--------------------------------------+
+	| http_proxy          | None                                 |
+	| updated_at          | None                                 |
+	| master_flavor_id    | None                                 |
+	| ssh_authorized_key  | None                                 |
+	| uuid                | 09c87fcf-9aee-4916-827f-38da229c9641 |
+	| no_proxy            | None                                 |
+	| https_proxy         | None                                 |
+	| tls_disabled        | False                                |
+	| keypair_id          | testkey                              |
+	| public              | False                                |
+	| labels              | {}                                   |
+	| docker_volume_size  | 5                                    |
+	| server_type         | vm                                   |
+	| external_network_id | public                               |
+	| cluster_distro      | fedora-atomic                        |
+	| image_id            | fedora-21-atomic-5                   |
+	| volume_driver       | None                                 |
+	| registry_enabled    | False                                |
+	| apiserver_port      | None                                 |
+	| name                | swarmbaymodel                        |
+	| created_at          | 2016-02-15T00:52:55+00:00            |
+	| network_driver      | docker                               |
+	| fixed_network       | None                                 |
+	| coe                 | swarm                                |
+	| flavor_id           | m1.small                             |
+	| dns_nameserver      | 192.168.10.1                         |
+	+---------------------+--------------------------------------+
+
+$ magnum bay-create --name swarmbay --baymodel swarmbaymodel --node-count 2
+	+--------------------+------------------------------------------------------------+
+	| Property           | Value                                                      |
+	+--------------------+------------------------------------------------------------+
+	| status             | None                                                       |
+	| uuid               | 05fa7e60-5305-4b73-8209-75bd2c95ec96                       |
+	| stack_id           | 4dabd9d6-2f0d-4827-a97c-89fb76f37499                       |
+	| status_reason      | None                                                       |
+	| created_at         | 2016-02-15T00:53:41+00:00                                  |
+	| updated_at         | None                                                       |
+	| bay_create_timeout | 0                                                          |
+	| api_address        | None                                                       |
+	| baymodel_id        | 09c87fcf-9aee-4916-827f-38da229c9641                       |
+	| master_addresses   | None                                                       |
+	| node_count         | 2                                                          |
+	| node_addresses     | None                                                       |
+	| master_count       | 1                                                          |
+	| discovery_url      | https://discovery.etcd.io/5e4cfe7c78c767f1dbc058e4e83adacf |
+	| name               | swarmbay                                                   |
+	+--------------------+------------------------------------------------------------+
+
+$ watch -n 5 magnum bay-list
+	+--------------------------------------+----------+------------+--------------+--------------------+
+	| uuid                                 | name     | node_count | master_count |status             |
+	+--------------------------------------+----------+------------+--------------+--------------------+
+	| 05fa7e60-5305-4b73-8209-75bd2c95ec96 | swarmbay | 2          | 1            |CREATE_IN_PROGRESS |
+	+--------------------------------------+----------+------------+--------------+--------------------+
+	↓
+	+--------------------------------------+----------+------------+--------------+-----------------+
+	| uuid                                 | name     | node_count | master_count | status          |
+	+--------------------------------------+----------+------------+--------------+-----------------+
+	| 05fa7e60-5305-4b73-8209-75bd2c95ec96 | swarmbay | 2          | 1            | CREATE_COMPLETE |
+	+--------------------------------------+----------+------------+--------------+-----------------+
+
+$ magnum bay-show swarmbay
+	+--------------------+------------------------------------------------------------+
+	| Property           | Value                                                      |
+	+--------------------+------------------------------------------------------------+
+	| status             | CREATE_COMPLETE                                            |
+	| uuid               | 05fa7e60-5305-4b73-8209-75bd2c95ec96                       |
+	| stack_id           | 4dabd9d6-2f0d-4827-a97c-89fb76f37499                       |
+	| status_reason      | Stack CREATE completed successfully                        |
+	| created_at         | 2016-02-15T00:53:41+00:00                                  |
+	| updated_at         | 2016-02-15T01:00:19+00:00                                  |
+	| bay_create_timeout | 0                                                          |
+	| api_address        | https://172.24.4.9:2376                                    |
+	| baymodel_id        | 09c87fcf-9aee-4916-827f-38da229c9641                       |
+	| master_addresses   | ['172.24.4.11']                                            |
+	| node_count         | 2                                                          |
+	| node_addresses     | ['172.24.4.12', '172.24.4.10']                             |
+	| master_count       | 1                                                          |
+	| discovery_url      | https://discovery.etcd.io/5e4cfe7c78c767f1dbc058e4e83adacf |
+	| name               | swarmbay                                                   |
+	+--------------------+------------------------------------------------------------+
+
+$ magnum container-create --name test-container --image docker.io/cirros:latest --bay swarmbay  --command "ping -c 4 192.168.10.1"
+	+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+	| Property    | Value                                                                                                                                                                                                                           |
+	+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+	| status      | Stopped                                                                                                                                                                                                                         |
+	| uuid        | 97615f1b-7feb-4840-8c47-d8f61e1aed4c                                                                                                                                                                                            |
+	| links       | ["{u'href': u'http://192.168.10.57:9511/v1/containers/97615f1b-7feb-4840-8c47-d8f61e1aed4c', u'rel': u'self'}", "{u'href': u'http://192.168.10.57:9511/containers/97615f1b-7feb-4840-8c47-d8f61e1aed4c', u'rel': u'bookmark'}"] |
+	| created_at  | 2016-02-15T01:13:03+00:00                                                                                                                                                                                                       |
+	| updated_at  | None                                                                                                                                                                                                                            |
+	| environment | None                                                                                                                                                                                                                            |
+	| command     | ping -c 4 192.168.10.1                                                                                                                                                                                                          |
+	|             |                                                                                                                                                                                                                                 |
+	| bay_uuid    | 05fa7e60-5305-4b73-8209-75bd2c95ec96                                                                                                                                                                                            |
+	| memory      | None                                                                                                                                                                                                                            |
+	| image       | docker.io/cirros:latest                                                                                                                                                                                                         |
+	| name        | test-container                                                                                                                                                                                                                  |
+	+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+$ magnum container-start test-container
+
+$ magnum container-logs test-container
+	PING 192.168.10.1 (192.168.10.1): 56 data bytes
+	64 bytes from 192.168.10.1: seq=0 ttl=61 time=31.116 ms
+	64 bytes from 192.168.10.1: seq=1 ttl=61 time=10.855 ms
+	64 bytes from 192.168.10.1: seq=2 ttl=61 time=6.684 ms
+	64 bytes from 192.168.10.1: seq=3 ttl=61 time=4.249 ms
+
+	--- 192.168.10.1 ping statistics ---
+	4 packets transmitted, 4 packets received, 0% packet loss
+	round-trip min/avg/max = 4.249/13.226/31.116 ms
+
+$ ssh -i ~/.ssh/id_rsa fedora@172.24.4.11
+	ログインはできた。
+
+$ magnum container-delete test-container
+
+----------------------------------------
+$ wget https://fedorapeople.org/groups/magnum/ubuntu-14.04.3-mesos-0.25.0.qcow2
+$ glance image-create --name ubuntu-mesos --visibility public --disk-format=qcow2 --container-format=bare --os-distro=ubuntu --file=ubuntu-14.04.3-mesos-0.25.0.qcow2
+	+------------------+--------------------------------------+
+	| Property         | Value                                |
+	+------------------+--------------------------------------+
+	| checksum         | 97cc1fdb9ca80bf80dbd6842aab7dab5     |
+	| container_format | bare                                 |
+	| created_at       | 2016-02-15T02:08:18Z                 |
+	| disk_format      | qcow2                                |
+	| id               | 46d2325d-96f8-4448-bd36-4321f5ba5cee |
+	| min_disk         | 0                                    |
+	| min_ram          | 0                                    |
+	| name             | ubuntu-mesos                         |
+	| os_distro        | ubuntu                               |
+	| owner            | a4fdca6b334c407f862311454d79cacf     |
+	| protected        | False                                |
+	| size             | 753616384                            |
+	| status           | active                               |
+	| tags             | []                                   |
+	| updated_at       | 2016-02-15T02:08:24Z                 |
+	| virtual_size     | None                                 |
+	| visibility       | public                               |
+	+------------------+--------------------------------------+
+
+$ magnum baymodel-create --name mesosbaymodel --image-id ubuntu-mesos --keypair-id testkey --external-network-id public --dns-nameserver 192.168.10.1 --flavor-id m1.small --coe mesos
+
+$ magnum bay-create --name mesosbay --baymodel mesosbaymodel --node-count 2
+	「node-count 2」だと、3番目のインスタンス作成がエラーとなったので、「node-count 1」で作り直し
+	$ magnum bay-create --name mesosbay --baymodel mesosbaymodel --node-count 1
+
+$ magnum bay-show mesosbay
+
+$ cat > mesos.json << END
+{
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cirros"
+    }
+  },
+  "id": "ubuntu",
+  "instances": 1,
+  "cpus": 0.5,
+  "mem": 512,
+  "uris": [],
+  "cmd": "ping 192.168.10.1"
+}
+END
+$ MASTER_IP=$(magnum bay-show mesosbay | awk '/ api_address /{print $4}')
+$ curl -X POST -H "Content-Type: application/json" http://${MASTER_IP}:8080/v2/apps -d@mesos.json
+	{"id":"/ubuntu","cmd":"ping 192.168.10.1","args":null,"user":null,"env":{},"instances":1,"cpus":0.5,"mem":512.0,"disk":0.0,"executor":"","constraints":[],"uris":[],"storeUrls":[],"ports":[0],"requirePorts":false,"backoffSeconds":1,"backoffFactor":1.15,"maxLaunchDelaySeconds":3600,"container":{"type":"DOCKER","volumes":[],"docker":{"image":"cirros","privileged":false,"parameters":[],"forcePullImage":false}},"healthChecks":[],"dependencies":[],"upgradeStrategy":{"minimumHealthCapacity":1.0,"maximumOverCapacity":1.0},"labels":{},"acceptedResourceRoles":null,"version":"2016-02-15T02:30:33.917Z","tasksStaged":0,"tasksRunning":0,"tasksHealthy":0,"tasksUnhealthy":0,"deployments":[{"id":"08d13695-8583-4f60-ac41-205ea53e51e7"}],"tasks":[]}
+
+$ curl http://${MASTER_IP}:8080/v2/apps
+	{"apps":[{"id":"/ubuntu","cmd":"ping 192.168.10.1","args":null,"user":null,"env":{},"instances":1,"cpus":0.5,"mem":512.0,"disk":0.0,"executor":"","constraints":[],"uris":[],"storeUrls":[],"ports":[10000],"requirePorts":false,"backoffSeconds":1,"backoffFactor":1.15,"maxLaunchDelaySeconds":3600,"container":{"type":"DOCKER","volumes":[],"docker":{"image":"cirros","privileged":false,"parameters":[],"forcePullImage":false}},"healthChecks":[],"dependencies":[],"upgradeStrategy":{"minimumHealthCapacity":1.0,"maximumOverCapacity":1.0},"labels":{},"acceptedResourceRoles":null,"version":"2016-02-15T02:30:33.917Z","versionInfo":{"lastScalingAt":"2016-02-15T02:30:33.917Z","lastConfigChangeAt":"2016-02-15T02:30:33.917Z"},"tasksStaged":0,"tasksRunning":1,"tasksHealthy":0,"tasksUnhealthy":0,"deployments":[]}]}
+
+$ curl http://${MASTER_IP}:8080/v2/tasks
+	{"tasks":[{"id":"ubuntu.21eb9f1b-d38c-11e5-94e3-0242549cce88","host":"10.0.0.5","ports":[31099],"startedAt":"2016-02-15T02:31:20.914Z","stagedAt":"2016-02-15T02:30:52.278Z","version":"2016-02-15T02:30:33.917Z","slaveId":"79948e83-b4d9-493d-9320-56abdf80f3c2-S0","appId":"/ubuntu","servicePorts":[10000]}]}
+
+以下アクセスしたいが、アクセス可能なホストにWebブラウザがない。
+	http://<master>:5050/
+	http://<master>:8080/
 
 
 ================================================================================
